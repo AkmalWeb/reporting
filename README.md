@@ -1,3 +1,0 @@
-# mysite
-dev
-Heather 
