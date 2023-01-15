@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://www.vplan.nl/sitemap_vplan-nl.xml
