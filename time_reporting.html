@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<body>
+<html>
+
+<h1>Project reporting made easy</h1>
+<p> Create and upload multiple records at once. No more waiting!</p>
+
+
+
+      <!-- Inro section start -->
+<h3>Instructions
+<div class="Intro_section">
+  <div class="container">
+    <p class="Intro_text">Make sure you are on Moog network or VPN.</p>
+    <p class="Intro_text"><a href="https://intranet.intl.moog.com/securelogin.asp?referrer=/ProjectReporting/schedule.asp" target="_blank" rel="noopener noreferrer" id="login-link">Login here</a>
+    
+<p class="Intro_text">
+<a href="https://intranet.intl.moog.com/ProjectReporting/schedule.asp?" target="_blank" rel="noopener noreferrer" id="scheduler-link"></a>
+
+<script>
+  const loginLink = document.getElementById('login-link');
+  const schedulerLink = document.getElementById('scheduler-link');
+
+  loginLink.addEventListener('click', () => {
+    setTimeout(() => {
+      window.open(schedulerLink.href, '_blank');
+    }, 5000); // wait for 5 seconds before opening scheduler link in the background
+  });
+</script>
+     
+      </p></h3>
+
+  </div>
+</div>
+
+<script>
+  const link = document.getElementById('link');
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.open(link.href, '_blank', 'noopener,noreferrer');
+  });
+</script>
+
+
+      <!-- Intro section end  -->
+
+
+<style>
+
+h1, p {
+        margin: 5 auto;
+        text-align: center
+       ;
+      }
+
+   
+    .container {
+        width: 80%;
+        margin: 0 auto;
+      }
+h3, p {
+        margin: 5 auto;
+        text-align: center
+       ;
+      }
+
+   
+    .container {
+        width: 80%;
+        margin: 0 auto;
+      }
+
+
+
+
+body {
+	background-color:	#E5E0D7;
+}
+
+body, td, th { /* redundant rules for bad browsers  */
+	font-family: tahoma,verdana,sans-serif;
+	font-size: 11px;
+}
+html>body, html>body td, html>body th {
+	font-size: 11px;
+}
+
+
+input-fields { border: 1px solid #888; background-color:#ddd; font-size: 10px; color: #555; }
+select { border: 1px solid #888; font-size: 10px; color: #555; }
+
+
+
+#input-fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+
+  .button-container {
+        display: flex;
+        justify-content: center;
+        padding-left: 0px;
+     margin-right: 0px;
+      }
+.button-container button {
+  margin-right: 5px;
+}
+
+#link-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+
+
+
+</style>
+
+<title>Project time reporting - Hyperlink Generator</title>
+
+    <script type="text/javascript">
+        function generateLink(date, subtask, hours) {
+            const baseUrl = "https://intranet.intl.moog.com/ProjectReporting/day.asp";
+            const action = "ADD";
+            const day = date.substring(8, 10);
+            const month = parseInt(date.substring(5, 7));
+            const year = date.substring(0, 4);
+            const project = "*NP";
+            const task = "NP";
+            const subtaskCode = subtask === " Personal Holiday" ? "10" : subtask === "Overtime" ? "20" : subtask === "Public Holidays" ? "30": subtask === "Sickness" ? "40": subtask === "Time in Lieu" ? "50": subtask === "Unpaid Hours" ? "60": subtask === "WO Production Hours" ? "70": subtask === "Supervision" ? "100": subtask === "Training" ? "110": subtask === "Meetings" ? "120": subtask === "Non-Prod Admin" ? "130": "";
+            const negative = "False";
+            const x = "34";
+            const y = "21";
+            const link = `${baseUrl}?Action=${action}&Day=${day}&month=${month}&Year=${year}&Project=${project}&Task=${task}&Subtask=${subtaskCode}&Neg=${negative}&Hours=${hours}&x=${x}&y=${y}`;
+            return link;
+        }
+
+       function generateMultipleLinks() {
+    const dateList = document.querySelectorAll(".date-selector");
+    const subtaskList = document.querySelectorAll(".subtask-selector");
+    const hoursList = document.querySelectorAll(".hours-selector");
+$("#duplicate-button").trigger("click");
+
+/////MissingDates message
+    let emptyDate = false;
+
+    for (let i = 0; i < dateList.length; i++) {
+        if (dateList[i].value === "") {
+            emptyDate = true;
+            break;
+        }
+    }
+
+    if (emptyDate) {
+        alert("Dates are missing. Please choose a date!");
+        return;
+    }
+    
+/////totalhours message
+    
+         let totalHours = {};
+    for (let i = 0; i < dateList.length; i++) {
+        const date = dateList[i].value;
+        const hours = parseFloat(hoursList[i].value);
+        if (date in totalHours) {
+            totalHours[date] += hours;
+        } else {
+            totalHours[date] = hours;
+        }
+    }
+
+    let exceedLimit = false;
+    let exceedDates = [];
+    for (let date in totalHours) {
+        if (totalHours[date] > 8.0) {
+            exceedLimit = true;
+            exceedDates.push(date);
+        }
+    }
+
+    if (exceedLimit) {
+        const message = "Hours per day exceeded on " + exceedDates.join(", ");
+        const confirmBox = confirm(message + "\nDo you want to continue?");
+        if (confirmBox === false) {
+            return;
+            
+                       
+    } else {
+
+    
+// Check if the message has already been displayed
+if (!document.querySelector(".exceeded-hours-message")) {
+    const messageBox = document.createElement("div");
+    messageBox.textContent = "Total day hours exceeded, please check!";
+    messageBox.style.color = "red";
+    messageBox.classList.add("exceeded-hours-message"); // add a class to the messageBox
+    const targetElement = document.querySelector("#link-list"); // replace "my-container" with the ID of the element you want to append the message to
+    targetElement.appendChild(messageBox);
+}
+
+    
+    }
+    
+    
+    
+}
+
+
+
+    const list = document.getElementById("hyperlink-list");
+    list.innerHTML = "Records";
+
+    for (let i = 0; i < dateList.length; i++) {
+        const date = dateList[i].value;
+        const subtask = subtaskList[i].value;
+        const hours = hoursList[i].value;
+
+        const link = generateLink(date, subtask, hours);
+        const listItem = document.createElement("li");
+        const hyperlink = document.createElement("a");
+        hyperlink.href = link;
+        hyperlink.target = "_blank";
+        hyperlink.innerText = `${date} - ${subtask} - ${hours}h`;
+        listItem.appendChild(hyperlink);
+        list.appendChild(listItem);
+    }
+}
+
+
+function openAllLinks() {
+  const links = document.querySelectorAll("#hyperlink-list a");
+  for (let i = 0; i < links.length; i++) {
+    window.open(links[i].href, '_blank');
+  }
+}
+
+
+
+
+ function clearAllLinks() {
+            const list = document.getElementById("hyperlink-list");
+            list.innerHTML = "";
+            const dateList = document.querySelectorAll(".date-selector");
+            const subtaskList = document.querySelectorAll(".subtask-selector");
+            const hoursList = document.querySelectorAll(".hours-selector");
+            for (let i = 0; i < dateList.length; i++) {
+                dateList[i].value = "";
+                subtaskList[i].selectedIndex = 0;
+                hoursList[i].selectedIndex = "7.00";
+            }
+              const messageBox = document.querySelector(".exceeded-hours-message");
+    if (messageBox) {
+        messageBox.remove();
+        }
+}
+
+
+
+    </script>
+
+
+
+
+<body>
+<br>
+ <h3><p>Select the dates, choose your subtask and hours.</p></h3>
+
+    <form>
+    
+           <div id="input-fields">
+            <div class="input-row">
+                            
+                <label for="date-selector-1">Date:</label>
+                
+                <input type="date" class="date-selector" id="date-selector-1">
+                
+                
+                <label for="subtask-selector-1">Subtask:</label>
+                
+                
+                <select class="subtask-selector" id="subtask-selector-1">
+                  <option value="Holiday"> Personal Holiday</option>  
+                  <option value="Overtime">Overtime</option>
+                  <option value="Public Holiday">Public Holiday</option>
+                  <option value="Sickness">Sickness</option>
+                  <option value="Time in Lieu">Time in Lieu</option>
+                  <option value="Unpaid Hours">Unpaid Hours</option>
+                  <option value="Production Hours">Production Hours</option>
+                  <option value="WO Production Hours">WO Production Hours</option>
+                  <option value="Supervision">Supervision</option>
+                  <option value="Training">Training</option>
+                    <option value="Meetings">Meetings</option>
+                    <option value="Non-Prod Admin">Non-Prod Admin</option>  
+                </select>
+              
+
+                <label for="hours-selector-1">Hours:</label>
+                <select class="hours-selector" id="hours-selector-1">
+                    <option value="1.00">1.00</option>
+                    <option value="2.00">2.00</option>
+					<option value="3.00">3.00</option>
+					<option value="4.00">4.00</option>
+					<option value="5.00">5.00</option>
+					<option value="6.00">6.00</option>
+					<option value="7.00">7.00</option>
+					<option value="8.00" selected>8.00</option>
+					<option value="9.00">9.00</option>
+					<option value="10.00">10.00</option>
+					<option value="11.00">11.00</option>
+                    <option value="12.00">12.00</option>
+                </select>
+                
+               
+                 <button type="button" onclick="generateMultipleLinks()">+</button>
+                <button type="button" class="remove-button">-</button>
+                <br>
+                
+            </div>
+        </div>
+
+</form>
+
+
+<br>
+
+
+<div id="link-list">
+    <ul id="hyperlink-list"></ul>
+  
+    
+    <h3> Click Create record and Verify your records.</h3>
+      <div class="button-container">
+    
+    <button type="button" id="duplicate-button">Add row</button>
+     <button type="button" onclick="generateMultipleLinks()">Create record</button>
+     <button type="button" onclick="clearAllLinks()">Clear All</button>
+</div>
+
+
+
+<br>
+
+<h3>
+
+<br>Click upload All Records (this will open multple tabs).
+
+
+</h3>       
+
+
+     <div class="button-container">
+         
+     <button type="button" onclick="openAllLinks()">Upload All Records</button>
+      
+            
+       
+    </div>
+         
+         
+         <br>NOTE: Your browser may block pop-up. Select "Always allow pop-up and redirects (right top corner) ..
+        <br><br>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+    let inputCount = 1;
+
+// Saved for later
+
+//duplicate record
+$(document).on("click", "#duplicate-button", function() {
+  const lastRow = $("#input-fields .input-row:last-child");
+  const newRow = lastRow.clone();
+  newRow.appendTo("#input-fields");
+  inputCount++;
+  newRow.find(".date-selector").attr("id", `date-selector-${inputCount+1}`);
+  newRow.find(".subtask-selector").attr("id", `subtask-selector-${inputCount}`);
+  newRow.find(".hours-selector").attr("id", `hours-selector-${inputCount}`);
+  newRow.find(".remove-button").show();
+});
+
+$(document).on("click", ".remove-button", function() {
+  $(this).closest(".input-row").remove();
+});
+
+$(document).ready(function() {
+  $("#input-fields .input-row:last-child .remove-button").hide();
+});
+
+
+</script>
+
+
+<!-- footer section Start -->
+      <!-- Donate section start -->
+      <div class="Donate_section">
+         <div class="container">
+            <p class="Donate_text">Did I save your time?<a href="https://tikkie.me/pay/h55lp8v840blu73uaeis"> Donate for bittergarnituur.</a></p>
+         </div>
+      </div>
+      <!-- copyright section end  -->
+
+     <!-- copyright section start -->
+      <div class="copyright_section">
+         <div class="container">
+            <p class="copyright_text">By Akmal Zakeryaev 2023 All Rights Reserved.(At your own risk)<a href="https://en.wikipedia.org/wiki/Copyright"> Copy Rights.</a></p>
+            <p class="feedback">Share your feedback <a href="https://ncv.microsoft.com/vpssNQPKlV">Feedback form</a></p>
+         </div>
+      </div>
+      <!-- copyright section end  -->
+<html>
+<head>
+
+
+
