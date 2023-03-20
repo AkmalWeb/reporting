@@ -21,15 +21,21 @@
 <p class="Intro_text">
 <a href="https://intranet.intl.moog.com/ProjectReporting/schedule.asp?" target="_blank" rel="noopener noreferrer" id="scheduler-link"></a>
 
-<script>
-  const loginLink = document.getElementById('login-link');
-  const schedulerLink = document.getElementById('scheduler-link');
 
-  loginLink.addEventListener('click', () => {
+<script>
+const loginLink = document.getElementById('login-link');
+const schedulerLink = document.getElementById('scheduler-link');
+
+loginLink.addEventListener('click', () => {
+  setTimeout(() => {
+    let newTab = window.open(schedulerLink.href, '_blank'); // Open the scheduler link in a new tab
     setTimeout(() => {
-      window.open(schedulerLink.href, '_blank');
-    }, 5000); // wait for 5 seconds before opening scheduler link in the background
-  });
+      if (!newTab.closed) { // Check if the new tab is still open
+        newTab.close(); // Close the new tab
+      }
+    }, 5000); // Wait for 5 seconds before closing the tab
+  }, 5000); // Wait for 5 seconds before opening scheduler link in the background
+});
 </script>
      
       </p></h3>
