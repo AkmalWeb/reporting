@@ -7,7 +7,7 @@
 <html>
 
 <h1>Project reporting made easy</h1>
-<p> Create and upload multiple records at once. No more waiting!</p>
+<p> Create and upload multiple records at once. No more waiting and clicking!</p>
 
 <br>
 <br>
@@ -15,29 +15,35 @@
       <!-- Inro section start -->
 <h3>Follow the steps below:
 <div class="Intro_section">
-  <div class="container">
-    <p class="Intro_text">Make sure you are on Moog network or VPN.</p>
-    <p class="Intro_text"><a href="https://intranet.intl.moog.com/securelogin.asp?referrer=/ProjectReporting/schedule.asp" target="_blank" rel="noopener noreferrer" id="login-link">Step 1: Click Login here</a>
-    
-<p class="Intro_text">
-<a href="https://intranet.intl.moog.com/ProjectReporting/schedule.asp?" target="_blank" rel="noopener noreferrer" id="scheduler-link"></a>
-
+<div class="container">
+  <p class="Intro_text">Make sure you are on Moog network or VPN.</p>
+  <p class="Intro_text">
+    <a href="https://intranet.intl.moog.com/securelogin.asp?referrer=/ProjectReporting/schedule.asp" target="_blank" rel="noopener noreferrer" id="login-link"></a>
+  </p>
+  <p class="Intro_text">
+    <a href="https://intranet.intl.moog.com/ProjectReporting/schedule.asp?" target="_blank" rel="noopener noreferrer" id="scheduler-link">1: Open schedule </a>
+  </p>
+</div>
 
 <script>
-const loginLink = document.getElementById('login-link');
-const schedulerLink = document.getElementById('scheduler-link');
+  const loginLink = document.getElementById('login-link');
+  const schedulerLink = document.getElementById('scheduler-link');
 
-loginLink.addEventListener('click', () => {
-  setTimeout(() => {
-    let newTab = window.open(schedulerLink.href, '_blank'); // Open the scheduler link in a new tab
+  schedulerLink.addEventListener('click', (event) => {
+   //event.preventDefault(); // Prevent the default behavior of the login link
     setTimeout(() => {
-      if (!newTab.closed) { // Check if the new tab is still open
-        newTab.close(); // Close the new tab
-      }
-    }, 5000); // Wait for 5 seconds before closing the tab
-  }, 8000); // Wait for 5 seconds before opening scheduler link in the background
-});
+      //loginLink.parentNode.removeChild(loginLink); // Remove the login link after 5 seconds
+      let newTab = window.open(loginLink.href, '_blank'); // Open the scheduler link in a new tab
+      setTimeout(() => {
+        if (!newTab.closed) { // Check if the new tab is still open
+          newTab.close(); // Close the new tab
+        }
+      }, 8000); // Wait for 0.02 seconds before closing the tab
+    }, 0); // Wait for 15 seconds before opening scheduler link in the background
+  });
 </script>
+
+
      
       </p></h3>
 
@@ -245,13 +251,61 @@ if (!document.querySelector(".exceeded-hours-message")) {
 
 
 function openAllLinks() {
-  const links = document.querySelectorAll("#hyperlink-list a");
-  for (let i = 0; i < links.length; i++) {
-    window.open(links[i].href, '_blank');
-  }
+const links = document.querySelectorAll("#hyperlink-list a");
+const numLinks = links.length;
+let tabsClosed = 0;
+for (let i = 0; i < numLinks; i++) {
+const tab = window.open(links[i].href, '_blank');
+setTimeout(() => {
+tab.close();
+tabsClosed++;
+if (tabsClosed === numLinks) {
+window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_blank');
+}
+}, 20000); // close after .20 minute (20,000 milliseconds)
+}
 }
 
 
+function openAllLinks() {
+  const links = document.querySelectorAll("#hyperlink-list a");
+  const numLinks = links.length;
+  let tabsClosed = 0;
+
+  // Start the countdown timer
+  startCountdownTimer(30);
+
+  for (let i = 0; i < numLinks; i++) {
+    const tab = window.open(links[i].href, '_blank');
+setTimeout(() => {
+tab.close();
+tabsClosed++;
+if (tabsClosed === numLinks) {
+window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_blank');
+}
+}, 20000); // close after .20 minute (20,000 milliseconds)
+}
+}
+
+function startCountdownTimer(seconds) {
+const countdownTimer = document.getElementById('countdown-timer');
+countdownTimer.style.display = 'block';
+countdownTimer.textContent = seconds;
+
+let remainingTime = seconds;
+
+const countdown = setInterval(() => {
+remainingTime--;
+countdownTimer.textContent = remainingTime;
+
+if (remainingTime <= 0) {
+  clearInterval(countdown);
+  countdownTimer.style.display = 'none';
+}
+}, 1000); // Update every second
+}
+
+This modification to your `openAllLinks` function starts the countdown timer for 30 seconds when the function is triggered. The `startCountdownTimer` function updates the countdown timer element's text content and displays it until the countdown reaches zero. When the countdown reaches zero, it hides the countdown timer.
 
 
  function clearAllLinks() {
@@ -328,7 +382,7 @@ function openAllLinks() {
                 </select>
                 
                
-                 <button type="button" onclick="generateMultipleLinks()">+</button>
+                 
                 <button type="button" class="remove-button">-</button>
                 <br>
                 
@@ -387,7 +441,8 @@ function openAllLinks() {
 <script type="text/javascript">
     let inputCount = 1;
 
-// Saved for later
+// Saved for later 
+//<button type="button" onclick="generateMultipleLinks()">+</button>
 
 //duplicate record
 $(document).on("click", "#duplicate-button", function() {
@@ -438,7 +493,24 @@ $(document).ready(function() {
       <!-- copyright section end  -->
 <html>
 <head>
+<div id="countdown-timer"></div>
 
+<style>
+  #countdown-timer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    display: none;
+  }
+</style>
 
 
 
