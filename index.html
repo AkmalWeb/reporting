@@ -287,27 +287,6 @@ window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_b
 }
 }
 
-function startCountdownTimer(seconds) {
-const countdownTimer = document.getElementById('countdown-timer');
-countdownTimer.style.display = 'block';
-countdownTimer.textContent = seconds;
-
-let remainingTime = seconds;
-
-const countdown = setInterval(() => {
-remainingTime--;
-countdownTimer.textContent = remainingTime;
-
-if (remainingTime <= 0) {
-  clearInterval(countdown);
-  countdownTimer.style.display = 'none';
-}
-}, 1000); // Update every second
-}
-
-This modification to your `openAllLinks` function starts the countdown timer for 30 seconds when the function is triggered. The `startCountdownTimer` function updates the countdown timer element's text content and displays it until the countdown reaches zero. When the countdown reaches zero, it hides the countdown timer.
-
-
  function clearAllLinks() {
             const list = document.getElementById("hyperlink-list");
             list.innerHTML = "";
