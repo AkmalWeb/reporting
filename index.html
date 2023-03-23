@@ -266,27 +266,6 @@ window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_b
 }
 }
 
-
-function openAllLinks() {
-  const links = document.querySelectorAll("#hyperlink-list a");
-  const numLinks = links.length;
-  let tabsClosed = 0;
-
-  // Start the countdown timer
-  startCountdownTimer(30);
-
-  for (let i = 0; i < numLinks; i++) {
-    const tab = window.open(links[i].href, '_blank');
-setTimeout(() => {
-tab.close();
-tabsClosed++;
-if (tabsClosed === numLinks) {
-window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_blank');
-}
-}, 20000); // close after .20 minute (20,000 milliseconds)
-}
-}
-
  function clearAllLinks() {
             const list = document.getElementById("hyperlink-list");
             list.innerHTML = "";
