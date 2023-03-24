@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-<body>
+
 
 <!DOCTYPE html>
 <body>
@@ -11,17 +9,37 @@
 
 <br>
 <br>
-<br>
+
+
       <!-- Inro section start -->
-<h3>Follow the steps below:
+<h3>Follow the steps below:</h3>
 <div class="Intro_section">
 <div class="container">
-  <p class="Intro_text">Make sure you are on Moog network or VPN.</p>
-  <p class="Intro_text">
-    <a href="https://intranet.intl.moog.com/securelogin.asp?referrer=/ProjectReporting/schedule.asp" target="_blank" rel="noopener noreferrer" id="login-link"></a>
+  <p class="Intro_text"><h3>Step 1: </h3> 
+  
+  
+ 
+ <p class="Intro_text">
+  Make sure you are on Moog network or VPN.
+  
   </p>
+ 
+ <div>
+ <p>Login and check the open dates.</p>
+ 
+ <p class="Intro_text">
+  
+    <B> <a href="https://intranet.intl.moog.com/securelogin.asp?referrer=/ProjectReporting/schedule.asp?" target="_blank" rel="noopener noreferrer" id="login-link">Click Login</a></B>
+
+
+   
+   <p class="Intro_text">
+  <i>NOTE: press login, check schedule and come back...</i>
+  
+  </p>  
+  
   <p class="Intro_text">
-    <a href="https://intranet.intl.moog.com/ProjectReporting/schedule.asp?" target="_blank" rel="noopener noreferrer" id="scheduler-link">1: Open schedule </a>
+    <a href="https://intranet.intl.moog.com/ProjectReporting/schedule.asp?" target="_blank" rel="noopener noreferrer" id="scheduler-link"></a>
   </p>
 </div>
 
@@ -29,23 +47,24 @@
   const loginLink = document.getElementById('login-link');
   const schedulerLink = document.getElementById('scheduler-link');
 
-  schedulerLink.addEventListener('click', (event) => {
-   //event.preventDefault(); // Prevent the default behavior of the login link
+  loginLink.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the default behavior of the login link
+    let newTab = window.open(loginLink.href, '_blank'); // Open the login link in a new tab
     setTimeout(() => {
-      //loginLink.parentNode.removeChild(loginLink); // Remove the login link after 5 seconds
-      let newTab = window.open(loginLink.href, '_blank'); // Open the scheduler link in a new tab
-      setTimeout(() => {
-        if (!newTab.closed) { // Check if the new tab is still open
-          newTab.close(); // Close the new tab
-        }
-      }, 8000); // Wait for 0.02 seconds before closing the tab
-    }, 0); // Wait for 15 seconds before opening scheduler link in the background
+      if (!newTab.closed) { // Check if the new tab is still open
+        newTab.close(); // Close the new tab
+        let newSchedulerTab = window.open(schedulerLink.href, '_blank'); // Open the scheduler link in a new tab
+        setTimeout(() => {
+          if (!newSchedulerTab.closed) { // Check if the new tab is still open
+            //newSchedulerTab.close(); // Close the new tab
+          }
+        }, 10000); // Wait for 10 seconds before closing the scheduler link tab
+      }
+    }, 5000); // Wait for 5 seconds before closing the login link tab and opening the scheduler link tab
   });
 </script>
 
-
-     
-      </p></h3>
+     </p></h3>
 
   </div>
 </div>
@@ -291,10 +310,20 @@ window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_b
 
 
 <body>
-<br>
- <h3><p>Step 2: Select the dates, choose your subtask and hours.</p></h3>
-
-    <form>
+ 
+   <div class="Intro_section">
+<div class="container">
+  <p class="Intro_text"><h3>Step 2: </h3> 
+    
+ 
+ <p class="Intro_text">
+   Select the dates, choose your subtask and hours.
+  
+  </p>
+ 
+ <div>
+   
+  <form>
     
            <div id="input-fields">
             <div class="input-row">
@@ -350,14 +379,26 @@ window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_b
 </form>
 
 
-<br>
 
 
-<div id="link-list">
-    <ul id="hyperlink-list"></ul>
+
   
     
-    <h3> Step 3: Click Create record and Verify your records.</h3>
+        
+       <div class="Intro_section">
+<div class="container">
+  <p class="Intro_text"><h3>Step 3: </h3> 
+  
+  
+ 
+ <p class="Intro_text">
+   Click Create record and Verify your records.
+  
+  </p>
+ 
+ <div>
+    
+    
       <div class="button-container">
     
     <button type="button" id="duplicate-button">Add row</button>
@@ -366,19 +407,24 @@ window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_b
 </div>
 
 
+<div id="link-list">
+    <ul id="hyperlink-list"></ul>
 
-<br>
 
-<h3>
-
-<br>Step 4: Click Upload All Records (this will open multple tabs and wait).</h3>    
+       <div class="Intro_section">
+<div class="container">
+  <p class="Intro_text"><h3>Step 4: </h3> 
+  
+  
+ 
+ <p class="Intro_text">
+   Click Create record and Verify your records.
+  
+  </p>
+ 
+ </div>
 
  
-
-
-   
-
-
      <div class="button-container">
          
      <button type="button" onclick="openAllLinks()">Upload All Records</button>
@@ -386,11 +432,10 @@ window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_b
             
        
     </div>
-         <br>
+         
          <i>NOTE: Your browser may block pop-up. Select "Always allow pop-up and redirects (right top corner) ..</i>
         
         <br><br>
-
 
 
 
