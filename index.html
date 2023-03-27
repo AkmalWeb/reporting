@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <body>
 <html>
@@ -252,21 +251,29 @@ if (!document.querySelector(".exceeded-hours-message")) {
     const list = document.getElementById("hyperlink-list");
     list.innerHTML = "Records";
 
-    for (let i = 0; i < dateList.length; i++) {
-        const date = dateList[i].value;
-        const subtask = subtaskList[i].value;
-        const hours = hoursList[i].value;
+  for (let i = 0; i < dateList.length; i++) {
+    const date = dateList[i].value;
+    const subtask = subtaskList[i].value;
+    const hours = hoursList[i].value;
 
-        const link = generateLink(date, subtask, hours);
-        const listItem = document.createElement("li");
-        const hyperlink = document.createElement("a");
-        hyperlink.href = link;
-        hyperlink.target = "_blank";
-        hyperlink.innerText = `${date} - ${subtask} - ${hours}h`;
-        listItem.appendChild(hyperlink);
-        list.appendChild(listItem);
-    }
+    const link = generateLink(date, subtask, hours);
+    const listItem = document.createElement("li");
+    const hyperlink = document.createElement("a");
+    hyperlink.href = link;
+    hyperlink.target = "_blank";
+    const dateObj = new Date(date);
+    const dayOfWeek = dateObj.toLocaleString("en-US", { weekday: "long" });
+    hyperlink.innerText = `${dayOfWeek} - ${subtask} - ${hours}h`;
+    listItem.appendChild(hyperlink);
+    list.appendChild(listItem);
 }
+
+}
+
+
+
+
+
 
 
 function openAllLinks() {
@@ -348,7 +355,7 @@ window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_b
                   <option value="Supervision">Supervision</option>
                   <option value="Training">Training</option>
                     <option value="Meetings">Meetings</option>
-                    <option value="Non-Prod Admin">Non-Prod Admin</option>  
+                    <option value="Non-Prod Admin"selected>Non-Prod Admin</option>  
                 </select>
               
 
@@ -369,7 +376,7 @@ window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_b
                 </select>
                 
                
-                 
+                 <button type="button" id="duplicate-button">Add row</button>
                 <button type="button" class="remove-button">-</button>
                 <br>
                 
@@ -401,7 +408,7 @@ window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_b
     
       <div class="button-container">
     
-    <button type="button" id="duplicate-button">Add row</button>
+    
      <button type="button" onclick="generateMultipleLinks()">Create record</button>
      <button type="button" onclick="clearAllLinks()">Clear All</button>
 </div>
@@ -474,7 +481,7 @@ $(document).ready(function() {
 <!-- footer section Start -->
       <!-- Donate section start -->
       <p class="Donate_text">I made this in my private time.</p>
-            <p class="Donate_text">Did I save your time?<a href="https://tikkie.me/pay/h55lp8v840blu73uaeis"target="_blank" rel="noopener noreferrer"> Donate for bittergarnituur.</a></p>
+            <p class="Donate_text">Did I save your time?<a href="https://tikkie.me/pay/evoaq7i7gp46j9jo09bs"target="_blank" rel="noopener noreferrer"> Donate for bittergarnituur.</a></p>
         
         <div class="Donate_section">
          <div class="container">
@@ -521,4 +528,3 @@ $(document).ready(function() {
 
 </body>
 </html>
-
