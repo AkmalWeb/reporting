@@ -1,0 +1,61 @@
+h1, p {
+  margin: 5 auto;
+  text-align: center;
+}
+
+h3, p {
+  margin: 5 auto;
+  text-align: center;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+body {
+  background-color: #E5E0D7;
+}
+
+body, td, th {
+  font-family: tahoma,verdana,sans-serif;
+  font-size: 12px;
+}
+
+html>body, html>body td, html>body th {
+  font-size: 15px;
+}
+
+input {
+  border: 1px solid #888;
+  background-color: #FFFFFF;
+  font-size: 15px;
+  color: #555;
+}
+
+#input-fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  padding-left: 0px;
+  margin-right: 0px;
+}
+
+.button-container button {
+  margin-right: 5px;
+}
+
+#link-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
