@@ -118,7 +118,21 @@
         
 		<p><i>NOTE: Your browser may block pop-up. Select "Always allow pop-up and redirects (right top corner) ..</i></p>
         
-		<br><br>
+		<br>
+		<div class="button-container">
+<button type="button" id="submit-button">Submit all</button>
+
+<script>
+  document.getElementById('submit-button').addEventListener('click', function() {
+    window.open('https://intranet.intl.moog.com/ProjectReporting/schedule.asp?action=SUBMITopen', '_blank');
+  });
+</script>
+		</div>
+				<div>
+<p><i>NOTE: Make sure its all correct)..</i></p>
+
+		</div>
+		<br>
     </div>
 
 
@@ -258,15 +272,26 @@
             }
         }
 
-        $(document).on("click", "#add-row-button", function () {
-            const lastRow = $("#input-fields .input-row:last-child");
-            const newRow = lastRow.clone();
-            newRow.appendTo("#input-fields");
-            newRow.find(".date-selector").attr("id", `date-selector-${$(".date-selector").length}`);
-            newRow.find(".subtask-selector").attr("id", `subtask-selector-${$(".subtask-selector").length}`);
-            newRow.find(".hours-selector").attr("id", `hours-selector-${$(".hours-selector").length}`);
-            newRow.find(".remove-button").show();
-        });
+       $(document).on("click", "#add-row-button", function () {
+    const lastRow = $("#input-fields .input-row:last-child");
+    const newRow = lastRow.clone();
+
+    // Increment the date by one day for the new row
+    const currentDateInput = newRow.find(".date-selector");
+    const currentDateValue = currentDateInput.val();
+    if (currentDateValue) {
+      const currentDate = new Date(currentDateValue);
+      const nextDay = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+      const nextDayFormatted = nextDay.toISOString().substring(0, 10);
+      currentDateInput.val(nextDayFormatted);
+    }
+
+    newRow.appendTo("#input-fields");
+    newRow.find(".date-selector").attr("id", `date-selector-${$(".date-selector").length}`);
+    newRow.find(".subtask-selector").attr("id", `subtask-selector-${$(".subtask-selector").length}`);
+    newRow.find(".hours-selector").attr("id", `hours-selector-${$(".hours-selector").length}`);
+    newRow.find(".remove-button").show();
+  });
 
         $(document).on("click", ".remove-button", function () {
             $(this).closest(".input-row").remove();
