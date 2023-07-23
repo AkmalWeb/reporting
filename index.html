@@ -1,96 +1,128 @@
-
 <!DOCTYPE html>
-<body>
-
 <html>
-<link rel="stylesheet"type="text/css"href="Style.css">
-<h1>Project reporting made easy</h1>
-<p> Create and upload multiple records at once. No more waiting and clicking!</p>
 
-<br>
-<br>
- 
+<head>
+    <title>Project time reporting - Hyperlink Generator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 
-      <!-- Inro section start -->
-<h3>Follow the steps below:</h3>
-<div class="Intro_section">
-<div class="container">
-  <p class="Intro_text"><h3>Step 1: </h3> 
-  
-    <p class="video tutorial"><a href="https://akmalweb.github.io/reporting/Instructions.gif"target="_blank" rel="noopener noreferrer">Video Tutorial</a></p>
- 
- <p class="Intro_text">
-  Make sure you are on Moog network or VPN.
-  
-  </p>
- 
+<body>
+    <h1>Project reporting made easy</h1>
+    <p> Create and upload multiple records at once. No more waiting and clicking!</p>
+
+    <h3>Follow the steps below:</h3>
+    <div class="Intro_section">
+        <div class="container">
+            <h3>Step 1:</h3>
+            <p class="Intro_text">
+                Make sure you are on Moog network or VPN.
+            </p>
+            <p class="video tutorial">
+                <a href="https://akmalweb.github.io/reporting/Instructions.mp4" target="_blank"
+                    rel="noopener noreferrer">Video Tutorial</a>
+            </p>
+            <p class="Intro_text">Login and check the open dates.</p>
+            <p class="Intro_text">
+                <B> <a href="https://intranet.intl.moog.com/securelogin.asp?referrer=/ProjectReporting/schedule.asp?"
+                        target="_blank" rel="noopener noreferrer" id="login-link">Click Login</a></B>
+            </p>
+            <p class="Intro_text">
+                <i>NOTE: press login, check schedule and come back...</i>
+            </p>
+            <p class="Intro_text">
+                <a href="https://intranet.intl.moog.com/ProjectReporting/schedule.asp?" target="_blank"
+                    rel="noopener noreferrer" id="scheduler-link"></a>
+            </p>
+        </div>
+    </div>
+
+    <h3>Step 2:</h3>
+    <div class="Intro_section">
+        <div class="container">
+            <p class="Intro_text">
+                Select the dates, choose your subtask and hours.
+            </p>
+            <form>
+                <div id="input-fields">
+                    <div class="input-row">
+                        <label for="date-selector-1">Date:</label>
+                        <input type="date" class="date-selector" id="date-selector-1" min="2023-01-01"
+                            max="2023-12-31">
+                        <label for="subtask-selector-1">Subtask:</label>
+                        <select class="subtask-selector" id="subtask-selector-1">
+                            <option value="Personal Holiday"> Personal Holiday</option>
+                            <option value="Overtime">Overtime</option>
+                            <option value="Public Holiday">Public Holiday</option>
+                            <option value="Sickness">Sickness</option>
+                            <option value="Time in Lieu">Time in Lieu</option>
+                            <option value="Unpaid Hours">Unpaid Hours</option>
+                            <option value="WO Production Hours">WO Production Hours</option>
+                            <option value="Supervision">Supervision</option>
+                            <option value="Training">Training</option>
+                            <option value="Meetings">Meetings</option>
+                            <option value="Non-Prod Admin" selected>Non-Prod Admin</option>
+                        </select>
+                        <label for="hours-selector-1">Hours:</label>
+                        <select class="hours-selector" id="hours-selector-1">
+                            <option value="1.00">1.00</option>
+                            <option value="2.00">2.00</option>
+                            <option value="3.00">3.00</option>
+                            <option value="4.00">4.00</option>
+                            <option value="5.00">5.00</option>
+                            <option value="6.00">6.00</option>
+                            <option value="7.00">7.00</option>
+                            <option value="8.00" selected>8.00</option>
+                            <option value="9.00">9.00</option>
+                            <option value="10.00">10.00</option>
+                            <option value="11.00">11.00</option>
+                            <option value="12.00">12.00</option>
+                        </select>
+                        <button type="button" id="add-row-button">Add row</button>
+                        <button type="button" class="remove-button">-</button>
+                        <br>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <h3>Step 3:</h3>
+    <div class="Intro_section">
+        <div class="container">
+            <p class="Intro_text">
+                Click Create record and Verify your records.
+            </p>
+            <div class="button-container">
+                <button type="button" id="generate-links-button">Create record</button>
+                <button type="button" id="clear-all-button">Clear All</button>
+            </div>
+            <div id="link-list">
+                <ul id="hyperlink-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <h3>Step 4:</h3>
+    <div class="Intro_section">
+        <div class="container">
+            <p class="Intro_text">
+                Click Upload All, to upload your records (grab a coffee).
+            </p>
+        </div>
+        
+		<div class="button-container">
+            <button type="button" id="upload-all-button">Upload All Records</button>
+        
+		</div>
+        
+		<p><i>NOTE: Your browser may block pop-up. Select "Always allow pop-up and redirects (right top corner) ..</i></p>
+        
+		<br><br>
+    </div>
 
 
-
-
-
- <div>
- <p>Login and check the open dates.</p>
- 
- <p class="Intro_text">
-  
-    <B> <a href="https://intranet.intl.moog.com/securelogin.asp?referrer=/ProjectReporting/schedule.asp?" target="_blank" rel="noopener noreferrer" id="login-link">Click Login</a></B>
-
-
-   
-   <p class="Intro_text">
-  <i>NOTE: press login, check schedule and come back...</i>
-  
-  </p>  
-  
-  <p class="Intro_text">
-    <a href="https://intranet.intl.moog.com/ProjectReporting/schedule.asp?" target="_blank" rel="noopener noreferrer" id="scheduler-link"></a>
-  </p>
-</div>
-
-<script>
-  const loginLink = document.getElementById('login-link');
-  const schedulerLink = document.getElementById('scheduler-link');
-
-  loginLink.addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent the default behavior of the login link
-    let newTab = window.open(loginLink.href, '_blank'); // Open the login link in a new tab
-    setTimeout(() => {
-      if (!newTab.closed) { // Check if the new tab is still open
-        newTab.close(); // Close the new tab
-        let newSchedulerTab = window.open(schedulerLink.href, '_blank'); // Open the scheduler link in a new tab
-        setTimeout(() => {
-          if (!newSchedulerTab.closed) { // Check if the new tab is still open
-            //newSchedulerTab.close(); // Close the new tab
-          }
-        }, 10000); // Wait for 10 seconds before closing the scheduler link tab
-      }
-    }, 5000); // Wait for 5 seconds before closing the login link tab and opening the scheduler link tab
-  });
-</script>
-
-     </p></h3>
-
-  </div>
-</div>
-
-<script>
-  const link = document.getElementById('link');
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
-    window.open(link.href, '_blank', 'noopener,noreferrer');
-  });
-</script>
-
-
-      <!-- Intro section end  -->
-
-<!-- <Style here>  -->
-
-
-<title>Project time reporting - Hyperlink Generator</title>
-
-    <script type="text/javascript">
+     <script>
         function generateLink(date, subtask, hours) {
             const baseUrl = "https://intranet.intl.moog.com/ProjectReporting/day.asp";
             const action = "ADD";
@@ -99,7 +131,7 @@
             const year = date.substring(0, 4);
             const project = "*NP";
             const task = "NP";
-            const subtaskCode = subtask === "Personal Holiday" ? "10" : subtask === "Overtime" ? "20" : subtask === "Public Holiday" ? "30": subtask === "Sickness" ? "40": subtask === "Time in Lieu" ? "50": subtask === "Unpaid Hours" ? "60": subtask === "WO Production Hours" ? "70": subtask === "Supervision" ? "100": subtask === "Training" ? "110": subtask === "Meetings" ? "120": subtask === "Non-Prod Admin" ? "130": "";
+            const subtaskCode = subtask === "Personal Holiday" ? "10" : subtask === "Overtime" ? "20" : subtask === "Public Holiday" ? "30" : subtask === "Sickness" ? "40" : subtask === "Time in Lieu" ? "50" : subtask === "Unpaid Hours" ? "60" : subtask === "WO Production Hours" ? "70" : subtask === "Supervision" ? "100" : subtask === "Training" ? "110" : subtask === "Meetings" ? "120" : subtask === "Non-Prod Admin" ? "130" : "";
             const negative = "False";
             const x = "34";
             const y = "21";
@@ -107,127 +139,109 @@
             return link;
         }
 
-       function generateMultipleLinks() {
-    const dateList = document.querySelectorAll(".date-selector");
-    const subtaskList = document.querySelectorAll(".subtask-selector");
-    const hoursList = document.querySelectorAll(".hours-selector");
-//$("#duplicate-button").trigger("click");
+        function generateMultipleLinks() {
+            const dateList = document.querySelectorAll(".date-selector");
+            const subtaskList = document.querySelectorAll(".subtask-selector");
+            const hoursList = document.querySelectorAll(".hours-selector");
 
-/////MissingDates message
-    let emptyDate = false;
-
-    for (let i = 0; i < dateList.length; i++) {
-        if (dateList[i].value === "") {
-            emptyDate = true;
-            break;
-        }
-    }
-
-    if (emptyDate) {
-        alert("Dates are missing. Please choose a date!");
-        return;
-    }
-    
-/////totalhours message
-    
-         let totalHours = {};
-    for (let i = 0; i < dateList.length; i++) {
-        const date = dateList[i].value;
-        const hours = parseFloat(hoursList[i].value);
-        if (date in totalHours) {
-            totalHours[date] += hours;
-        } else {
-            totalHours[date] = hours;
-        }
-    }
-
-    let exceedLimit = false;
-    let exceedDates = [];
-    for (let date in totalHours) {
-        if (totalHours[date] > 8.0) {
-            exceedLimit = true;
-            exceedDates.push(date);
-        }
-    }
-
-    if (exceedLimit) {
-        const message = "Hours per day exceeded on " + exceedDates.join(", ");
-        const confirmBox = confirm(message + "\nDo you want to continue?");
-        if (confirmBox === false) {
-            return;
-            
-                       
-    } else {
-
-    
-// Check if the message has already been displayed
-if (!document.querySelector(".exceeded-hours-message")) {
-    const messageBox = document.createElement("div");
-    messageBox.textContent = "Total day hours exceeded, please check!";
-    messageBox.style.color = "red";
-    messageBox.classList.add("exceeded-hours-message"); // add a class to the messageBox
-    const targetElement = document.querySelector("#link-list"); // replace "my-container" with the ID of the element you want to append the message to
-    targetElement.appendChild(messageBox);
-}
-
-    
-    }
-    
-    
-    
-}
-
-
-
-    const list = document.getElementById("hyperlink-list");
-    list.innerHTML = "Records";
-
-  for (let i = 0; i < dateList.length; i++) {
-    const date = dateList[i].value;
-    const subtask = subtaskList[i].value;
-    const hours = hoursList[i].value;
-
-    const link = generateLink(date, subtask, hours);
-    const listItem = document.createElement("li");
-    const hyperlink = document.createElement("a");
-    hyperlink.href = link;
-    hyperlink.target = "_blank";
-    const dateObj = new Date(date);
-    const dayOfWeek = dateObj.toLocaleString("en-US", { weekday: "long" });
-    hyperlink.innerText = `${dayOfWeek} - ${subtask} - ${hours}h`;
-    listItem.appendChild(hyperlink);
-    list.appendChild(listItem);
-}
-
-}
-
-
-
-  function openAllLinks() {
-      const links = document.querySelectorAll("#hyperlink-list a");
-      const numLinks = links.length;
-      let tabsClosed = 0;
-      let interval = 5000; // Change the interval between opening tabs here
-
-      function openNextTab(index) {
-        if (index < numLinks) {
-          const tab = window.open(links[index].href, '_blank');
-          setTimeout(() => {
-            tab.close();
-            tabsClosed++;
-            if (tabsClosed === numLinks) {
-              window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_blank');
+            // Validate if dates are missing
+            let emptyDate = false;
+            for (let i = 0; i < dateList.length; i++) {
+                if (dateList[i].value === "") {
+                    emptyDate = true;
+                    break;
+                }
             }
-            openNextTab(index + 1);
-          }, interval);
+
+            if (emptyDate) {
+                alert("Dates are missing. Please choose a date!");
+                return;
+            }
+
+            // Validate if total hours per day exceed the limit
+            let totalHours = {};
+            for (let i = 0; i < dateList.length; i++) {
+                const date = dateList[i].value;
+                const hours = parseFloat(hoursList[i].value);
+                if (date in totalHours) {
+                    totalHours[date] += hours;
+                } else {
+                    totalHours[date] = hours;
+                }
+            }
+
+            let exceedLimit = false;
+            let exceedDates = [];
+            for (let date in totalHours) {
+                if (totalHours[date] > 8.0) {
+                    exceedLimit = true;
+                    exceedDates.push(date);
+                }
+            }
+
+            if (exceedLimit) {
+                const message = "Hours per day exceeded on " + exceedDates.join(", ");
+                const confirmBox = confirm(message + "\nDo you want to continue?");
+                if (confirmBox === false) {
+                    return;
+                } else {
+                    // Check if the message has already been displayed
+                    if (!document.querySelector(".exceeded-hours-message")) {
+                        const messageBox = document.createElement("div");
+                        messageBox.textContent = "Total day hours exceeded, please check!";
+                        messageBox.style.color = "red";
+                        messageBox.classList.add("exceeded-hours-message"); // add a class to the messageBox
+                        const targetElement = document.querySelector("#link-list"); // replace "my-container" with the ID of the element you want to append the message to
+                        targetElement.appendChild(messageBox);
+                    }
+                }
+            }
+
+            const list = document.getElementById("hyperlink-list");
+            list.innerHTML = ""; // Clear previous links
+
+            for (let i = 0; i < dateList.length; i++) {
+                const date = dateList[i].value;
+                const subtask = subtaskList[i].value;
+                const hours = hoursList[i].value;
+
+                const link = generateLink(date, subtask, hours);
+                const listItem = document.createElement("li");
+                const hyperlink = document.createElement("a");
+                hyperlink.href = link;
+                hyperlink.target = "_blank";
+                const dateObj = new Date(date);
+                const dayOfWeek = dateObj.toLocaleString("en-US", { weekday: "long" });
+                hyperlink.innerText = `${dayOfWeek} - ${subtask} - ${hours}h`;
+                listItem.appendChild(hyperlink);
+                list.appendChild(listItem);
+            }
         }
-      }
 
-      openNextTab(0);
-    }
+        function openAllLinks() {
+            const links = document.querySelectorAll("#hyperlink-list a");
+            const numLinks = links.length;
+            let tabsClosed = 0;
+            let interval = 5000; // Change the interval between opening tabs here
 
+            function openNextTab(index) {
+                if (index < numLinks) {
+                    const tab = window.open(links[index].href, '_blank');
+                    setTimeout(() => {
+                        tab.close();
+                        tabsClosed++;
+                        if (tabsClosed === numLinks) {
+                            window.open("https://intranet.intl.moog.com/ProjectReporting/schedule.asp?", '_blank');
+                        }
+                        openNextTab(index + 1);
+                    }, interval);
+                }
+            }
 
- function clearAllLinks() {
+            openNextTab(0);
+        }
+
+        function clearAllLinks() {
             const list = document.getElementById("hyperlink-list");
             list.innerHTML = "";
             const dateList = document.querySelectorAll(".date-selector");
@@ -238,184 +252,64 @@ if (!document.querySelector(".exceeded-hours-message")) {
                 subtaskList[i].selectedIndex = 0;
                 hoursList[i].selectedIndex = "7.00";
             }
-              const messageBox = document.querySelector(".exceeded-hours-message");
-    if (messageBox) {
-        messageBox.remove();
+            const messageBox = document.querySelector(".exceeded-hours-message");
+            if (messageBox) {
+                messageBox.remove();
+            }
         }
-}
 
+        $(document).on("click", "#add-row-button", function () {
+            const lastRow = $("#input-fields .input-row:last-child");
+            const newRow = lastRow.clone();
+            newRow.appendTo("#input-fields");
+            newRow.find(".date-selector").attr("id", `date-selector-${$(".date-selector").length}`);
+            newRow.find(".subtask-selector").attr("id", `subtask-selector-${$(".subtask-selector").length}`);
+            newRow.find(".hours-selector").attr("id", `hours-selector-${$(".hours-selector").length}`);
+            newRow.find(".remove-button").show();
+        });
 
+        $(document).on("click", ".remove-button", function () {
+            $(this).closest(".input-row").remove();
+        });
 
+        $(document).ready(function () {
+            $("#input-fields .input-row:last-child .remove-button").hide();
+        });
+
+        document.getElementById('generate-links-button').addEventListener('click', generateMultipleLinks);
+        document.getElementById('upload-all-button').addEventListener('click', openAllLinks);
+        document.getElementById('clear-all-button').addEventListener('click', clearAllLinks);
+
+        const loginLink = document.getElementById('login-link');
+        const schedulerLink = document.getElementById('scheduler-link');
+
+        loginLink.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent the default behavior of the login link
+            let newTab = window.open(loginLink.href, '_blank'); // Open the login link in a new tab
+            setTimeout(() => {
+                if (!newTab.closed) { // Check if the new tab is still open
+                    newTab.close(); // Close the new tab
+                    let newSchedulerTab = window.open(schedulerLink.href, '_blank'); // Open the scheduler link in a new tab
+                    setTimeout(() => {
+                        if (!newSchedulerTab.closed) { // Check if the new tab is still open
+                            //newSchedulerTab.close(); // Close the new tab
+                        }
+                    }, 10000); // Wait for 10 seconds before closing the scheduler link tab
+                }
+            }, 5000); // Wait for 5 seconds before closing the login link tab and opening the scheduler link tab
+        });
+
+        const link = document.getElementById('link');
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.open(link.href, '_blank', 'noopener,noreferrer');
+        });
     </script>
-
-
-
-
-<body>
- 
-   <div class="Intro_section">
-<div class="container">
-  <p class="Intro_text"><h3>Step 2: </h3> 
-    
- 
- <p class="Intro_text">
-   Select the dates, choose your subtask and hours.
-  
-  </p>
- 
- <div>
-   
-  <form>
-    
-           <div id="input-fields">
-            <div class="input-row">
-                            
-                <label for="date-selector-1">Date:</label>
-                
-               <input type="date" class="date-selector" id="date-selector-1" min="2023-01-01" max="2023-12-31">
-                
-                
-                <label for="subtask-selector-1">Subtask:</label>
-                
-                
-                <select class="subtask-selector" id="subtask-selector-1">
-                  <option value="Personal Holiday"> Personal Holiday</option>  
-                  <option value="Overtime">Overtime</option>
-                  <option value="Public Holiday">Public Holiday</option>
-                  <option value="Sickness">Sickness</option>
-                  <option value="Time in Lieu">Time in Lieu</option>
-                  <option value="Unpaid Hours">Unpaid Hours</option>
-                  <option value="WO Production Hours">WO Production Hours</option>
-                  <option value="Supervision">Supervision</option>
-                  <option value="Training">Training</option>
-                    <option value="Meetings">Meetings</option>
-                    <option value="Non-Prod Admin"selected>Non-Prod Admin</option>  
-                </select>
-              
-
-                <label for="hours-selector-1">Hours:</label>
-                <select class="hours-selector" id="hours-selector-1">
-                    <option value="1.00">1.00</option>
-                    <option value="2.00">2.00</option>
-					<option value="3.00">3.00</option>
-					<option value="4.00">4.00</option>
-					<option value="5.00">5.00</option>
-					<option value="6.00">6.00</option>
-					<option value="7.00">7.00</option>
-					<option value="8.00" selected>8.00</option>
-					<option value="9.00">9.00</option>
-					<option value="10.00">10.00</option>
-					<option value="11.00">11.00</option>
-                    <option value="12.00">12.00</option>
-                </select>
-                
-               
-                 <button type="button" id="duplicate-button">Add row</button>
-                <button type="button" class="remove-button">-</button>
-                <br>
-                
-            </div>
-        </div>
-
-</form>
-
-
-
-
-
-  
-    
-        
-       <div class="Intro_section">
-<div class="container">
-  <p class="Intro_text"><h3>Step 3: </h3> 
-  
-  
- 
- <p class="Intro_text">
-   Click Create record and Verify your records.
-  
-  </p>
- 
- <div>
-    
-    
-      <div class="button-container">
-    
-    
-     <button type="button" onclick="generateMultipleLinks()">Create record</button>
-     <button type="button" onclick="clearAllLinks()">Clear All</button>
-</div>
-
-
-<div id="link-list">
-    <ul id="hyperlink-list"></ul>
-
-
-       <div class="Intro_section">
-<div class="container">
-  <p class="Intro_text"><h3>Step 4: </h3> 
-  
-  
- 
- <p class="Intro_text">
-   Click Upload All, to upload your records (grab a coffee).
-  
-  </p>
- 
- </div>
-
- 
-     <div class="button-container">
-         
-     <button type="button" onclick="openAllLinks()">Upload All Records</button>
-      
-            
-       
-    </div>
-         
-         <i>NOTE: Your browser may block pop-up. Select "Always allow pop-up and redirects (right top corner) ..</i>
-        
-        <br><br>
-
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script type="text/javascript">
-    let inputCount = 1;
-
-// Saved for later 
-//<button type="button" onclick="generateMultipleLinks()">+</button>
-
-//duplicate record
-$(document).on("click", "#duplicate-button", function() {
-  const lastRow = $("#input-fields .input-row:last-child");
-  const newRow = lastRow.clone();
-  newRow.appendTo("#input-fields");
-  inputCount++;
-  newRow.find(".date-selector").attr("id", `date-selector-${inputCount+1}`);
-  newRow.find(".subtask-selector").attr("id", `subtask-selector-${inputCount}`);
-  newRow.find(".hours-selector").attr("id", `hours-selector-${inputCount}`);
-  newRow.find(".remove-button").show();
-});
-
-$(document).on("click", ".remove-button", function() {
-  $(this).closest(".input-row").remove();
-});
-
-$(document).ready(function() {
-  $("#input-fields .input-row:last-child .remove-button").hide();
-});
-
-
-</script>
-
-
+	
 <!-- footer section Start -->
       <!-- Donate section start -->
       <p class="Donate_text">I made this in my private time.</p>
-            <p class="Donate_text">Did I save your time?<a href="https://www.ing.nl/particulier/betaalverzoek/index.html?trxid=cy3lPPEi8C0QOzebwb9dzsVvPJGOHdVs"target="_blank" rel="noopener noreferrer"> Donate for bittergarnituur.</a></p>
+            <p class="Donate_text">Did I save your time?<a href="https://www.paypal.com/donate/?hosted_button_id=8TFNXVNPKKX9Q"target="_blank" rel="noopener noreferrer"> Donate for bittergarnituur.</a></p>
         
         <div class="Donate_section">
          <div class="container">
@@ -437,29 +331,7 @@ $(document).ready(function() {
       <!-- copyright section end  -->
 <html>
 <head>
-<div id="countdown-timer"></div>
-
-<style>
-  #countdown-timer {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    font-weight: bold;
-    color: #000;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 5px;
-    z-index: 1000;
-    display: none;
-  }
-</style>
-
-
-
-
-
+	
 </body>
-</html>
 
+</html>
