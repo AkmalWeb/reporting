@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CEGTWJZLXY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CEGTWJZLXY');
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Inquiry Form</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+ 
+    </style>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <h1>Travel Inquiry Form</h1>
+	<h5>Generate a prefilled email for the travel agency with all the required information. Your email app must be open.</h5>
+
+    <form id="travelForm">
+    
+        <fieldset>
+            <legend><h4>Traveler Information</h4></legend>
+            <div>
+                <label for="travelerName">Traveler Name: *</label>
+                <input type="text" id="travelerName" required placeholder="First Last Name as in passport"><BR>
+       
+       			<label for="travelerName">Traveler Name (optional): </label>
+                <input type="text" id="travelerName2" placeholder="First Last Name as in passport">
+      
+
+   </fieldset>
+   
+   
+   <fieldset>
+   <legend><h4>Travel Itinerary</h4></legend>
+   <div>
+                <label for="fromAirport">From:*</label>
+                <input type="text" id="fromAirport" required placeholder="City, Country">
+             <label for="destinationAirport">Destination:*</label>
+                <input type="text" id="destinationAirport" required placeholder="City, Country">
+            </div>
+          
+            <div>
+                <label for="departureDate">Departure Date:*</label>
+                <input type="date" id="departureDate" required>
+                
+  <label for="departureTime"></label>
+        <select id="departureTime" onchange="toggledepartureTime()">
+            <option value="morning">Morning</option>
+            <option value="noon">Noon</option>
+            <option value="afternoon">After noon</option>
+        </select>
+        
+                <label for="returnDate">Return Date:*</label>
+                <input type="date" id="returnDate" required oninput="showReturnDateNote()">
+              <select id="returnTime" onchange="togglereturnTime()">
+            <option value="morning">Morning</option>
+            <option value="noon">Noon</option>
+            <option value="afternoon">After noon</option>
+        </select>
+           </div>
+          
+        </fieldset>
+        
+<fieldset>
+    <legend><h4>Travel by Air</h4></legend>
+    <div>
+        <label for="TravelByAir">Travel by Air:</label>
+        <select id="TravelByAir" onchange="toggleTravelByAirFields()">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
+    </div>
+    <div id="TravelByAirFields" style="display: none;">
+        <div>
+            <label for="TravelByAirLuggage">Check-in Luggage:</label>
+            <input type="number" value="0" id="TravelByAirLuggage" max="5">
+    
+        </div>
+ 
+             <div>
+                    <label for="TravelByAirComments">Any Comments?</label><br>
+                    <textarea id="TravelByAirComments" placeholder="Optional" rows="2" cols="50"></textarea>
+                </div>
+    </div>
+    <p id="TravelByAirNote" style="display: none; color: Maroon;">Note: You may be eligible for a business class seat for air travel with direct durations of more than 10 hours. Check the Moog BV policy.</p>
+</fieldset>
+
+<fieldset>
+    <legend><h4>Car Rental</h4></legend>
+    <div>
+        <label for="carRental">Car rental:</label>
+        <select id="carRental" onchange="toggleCarRentalFields()">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
+    </div>
+    <div id="carRentalFields" style="display: none;">
+        <div>
+            <label for="carPickupLocation">Car rental pick-up location:</label>
+            <input type="text" id="carPickupLocation">
+              <label for="carPickupSameAsDestination">Same as Travel Itinerary:</label>
+            <input type="checkbox" id="carPickupSameAsDestination">
+        </div>
+	        <div>
+            <label for="carPickupDate">Car rental pick-up date:</label>
+            <input type="date" id="carPickupDate">
+        </div>
+        <div>
+            <label for="carDropOffDate">Car rental drop-off date:</label>
+            <input type="date" id="carDropOffDate">
+        </div>
+        <div>
+            <label for="carRentalComments">Any Comments?</label><br>
+            <textarea id="carRentalComments" placeholder="Optional" rows="2" cols="50"></textarea>
+        </div>
+        
+    </div>
+    <p id="carRentalNote" style="display: none; color: Maroon;">Note: Taking a Taxi/Uber is recommended for safety and convenience unless the distance or the stay period is long. Renting a car must not exceed €150 per day.</p>
+</fieldset>
+
+
+<fieldset>
+    <legend><h4>Accommodation</h4></legend>
+    <div>
+        <label for="accommodation">Accommodation:</label>
+        <select id="accommodation">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
+    </div>
+    <div id="accommodationFields" style="display: none;">
+    
+        <div>
+            <label for="hotelLink">Hotel (preferred):</label>
+            <input type="url" id="hotelLink" placeholder="Hotel details or URL weblink" oninput="showHotelNote()">
+            
+            <label for="accommodationSameAsDestination">Same as Travel Itinerary:</label>
+            <input type="checkbox" id="accommodationSameAsDestination">
+            
+            <p id="hotelNote" style="display: none; color: Maroon;">Note: Hotel cost must not exceed €200 per night, if so, get management approval. Check the Moog BV travel policy.</p>
+        </div>
+	    <div>
+            <label for="checkInDate">Check-in Date:</label>
+            <input type="date" id="checkInDate">
+        </div>
+        <div>
+            <label for="checkOutDate">Check-out Date:</label>
+            <input type="date" id="checkOutDate">
+        </div>
+        <div>
+            <label for="accommodationComments">Any Comments?</label><br>
+            <textarea id="accommodationComments" rows="2" cols="50" placeholder="Optional"></textarea>
+        </div>
+    </div>
+    <p id="accommodationNote" style="display: none; color: Maroon;">Note: Please provide your check-in and check-out dates if you require accommodation. Check the Moog BV travel policy for accommodation details.</p>
+</fieldset>
+ 
+        <fieldset>
+            <legend><h4>Customer Information</h4></legend>
+            <div>
+                <label for="customerName">Customer Name:</label>
+                <input type="text" id="customerName"placeholder="On-site contact" oninput="showCustomerNameNote()">
+            </div>
+            <div>
+                <label for="customerAddress">Customer Address:</label>
+                <input type="text" id="customerAddress"placeholder="Company name and address">
+            </div>
+            <p id="customerNameNote" style="display: none; color: Maroon;">Note: For administration only. When visiting an event, enter the event name and the address.</p>
+        </fieldset>
+
+
+      
+        <fieldset>
+            <legend><h4>Additional Information</h4></legend>
+            <div>
+                <label for="CRMID">CRM/Case Id:</label>
+                <input type="text" id="CRMID" required  placeholder="Required for Services">
+            </div>
+            <div>
+                <label for="projectNumber">Project number:</label>
+                <input type="text" id="projectNumber" required placeholder="Required">
+            </div>
+            <div>
+                <label for="orderNumber">Order confirmation number:</label>
+                <input type="text" id="orderNumber" placeholder="Optional">
+            </div>
+            <div>
+    <label for="costCenter">Cost center:*</label>
+    <select id="costCenter" required>
+    <option value="" selected disabled>Choose your dept.</option>
+    <option value="8006500">8006500 Appl. Eng. Sim & Test</option>
+	<option value="8006550">8006550 Appl. Eng. Sim & Test US</option>
+    <option value="8001100">8001100 Assembly & Test</option>
+    <option value="8021300">8021300 Bus. Dev. Sim & Test Europe</option>
+    <option value="8034400">8034400 Contracts Administration</option>
+    <option value="8032100">8032100 Finance and Administration</option>
+    <option value="8034200">8034200 Front Office</option>
+    <option value="8034100">8034100 Gen Allocation</option>
+    <option value="8034300">8034300 General Management MNV</option>
+    <option value="8035200">8035200 Global SAP Process Management</option>
+    <option value="8021100">8021100 GVP EHPS</option>
+    <option value="8031100">8031100 Human Resources</option>
+    <option value="8033200">8033200 IT Administration</option>
+    <option value="8033100">8033100 IT Infrastructure</option>
+    <option value="8002200">8002200 Logistics</option>
+    <option value="8006800">8006800 M3 Engineering</option>
+    <option value="8006900">8006900 M3 Program Management</option>
+    <option value="8012400">8012400 M3 Strategic</option>
+    <option value="8006100">8006100 Management Engineering MNV</option>
+    <option value="8006200">8006200 Mechanical Design</option>
+    <option value="8002100">8002100 Production Eng. Sim & Test</option>
+    <option value="8006600">8006600 Program Management Sim & Test</option>
+    <option value="8035100">8035100 Project Management Backb.</option>
+    <option value="8006700">8006700 Project Management Sim & Test</option>
+    <option value="8003100">8003100 Quality Assurance</option>
+    <option value="8006350">8006350 Software Engineerin Aircraft</option>
+    <option value="8006400">8006400 Software Engineering Sim &Test</option>
+    <option value="8005100">8005100 Supply Chain</option>
+    <option value="8006300">8006300 System & Electr Eng Sim & Test</option>
+    <option value="8004100">8004100 Technical Services EMEA</option>
+    <option value="8034900">8034900 Trade Compliance</option>
+    <option value="8035300">8035300 Transform. Office</option>
+	<option value="1234567">1234567 Marketing</option>
+                  
+                </select>
+            </div>
+            <div>
+                <label for="quotedCosts">Quoted as actual costs?:</label>
+                <select id="quotedCosts" onchange="showQuotedCostsNote()">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                <p id="quotedCostsNote" style="display: none; color: maroon;">Note: If yes, your travel costs need to be approved by the customer before booking.</p>
+            </div>
+            <div>
+                <label for="reasonForTravel">Reason for travel*:</label><br>
+                <textarea id="reasonForTravel" rows="2" cols="50" required placeholder="visiting, customer or event, or system tuning,  maintenace, etc." ></textarea>
+            </div>
+        </fieldset>
+
+     
+        <fieldset>
+            <legend><h4>Manager Approval</h4></legend>
+            <div>
+                <label for="managerApproved">Manager Approved?:</label>
+                <select id="managerApproved" onchange="toggleManagerEmailField()">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                    <option value="N/A">N/A</option>
+                </select>
+            </div>
+            <div id="managerEmailField" style="display: none;">
+                <label for="managerEmail">Manager's Email:</label>
+                <input type="email" id="managerEmail" placeholder="Enter manager's email">
+            </div>
+        </fieldset>
+<fieldset>
+       
+		 <legend><h4>Travel Cost Breakdown</h4></legend>
+        <button type="button" id="toggleBreakdownButton" onclick="toggleBreakdown()">Travel Cost Breakdown</button>
+        <div id="travelCostBreakdown" style="display: none;">
+    <h3>Travel Cost Breakdown</h3>
+    <h4>Change values for cost calculation</h4>
+    <table>
+        <tr>
+            <td>
+                <label for="baseFlightFee">Base Flight Fee (in Euros):</label>
+            </td>
+            <td>
+                <input type="number" id="baseFlightFee" value="1000">
+            </td>
+            <td>
+                <label for="hotelFee">Hotel Fee (per night in Euros):</label>
+            </td>
+            <td>
+                <input type="number" id="hotelFee" value="150">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="carRentalFee">Car Rental Fee (per day in Euros):</label>
+            </td>
+            <td>
+                <input type="number" id="carRentalFee" value="120">
+            </td>
+            <td>
+                <label for="laborRate">Labor Rate (per hour):</label>
+            </td>
+            <td>
+                <input type="number" id="laborRate" value="175">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="totalLaborHours">Total Labor Hours:</label>
+            </td>
+            <td>
+                <input type="number" id="totalLaborHours" value="8">
+            </td>
+            <td>
+                <label for="travelRate">Travel Rate (per hour in Euros):</label>
+            </td>
+            <td>
+                <input type="number" id="travelRate" value="175">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="totalTravelHours">Total Travel Hours:</label>
+            </td>
+            <td>
+                <input type="number" id="totalTravelHours" value="4">
+            </td>
+            <td>
+                <label for="miscellaneousRate">Miscellaneous costs (taxi, reporting, tooling, etc.):</label>
+            </td>
+            <td>
+                <input type="number" id="miscellaneousRate" value="10">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="mealsCost">Meals Cost (per day in Euros):</label>
+            </td>
+            <td>
+                <input type="number" id="mealsCost" value="100">
+            </td>
+            <td>
+                <label for="sundriesCost">Sundries Cost (per hour):</label>
+            </td>
+            <td>
+                <input type="number" id="sundriesCost" value="2">
+            </td>
+        </tr>
+    </table>
+    <button type="button" id="calculateTotalCosts">Calculate Estimated Costs</button>
+    <p>
+    <span id="totalCosts"></span><br><br>
+    <h5>Ensure that the costs are within the project or purchase order budget.</h5>
+</div>
+
+</fieldset>
+      <fieldset>
+	  <div>
+        <button type="button" id="sendEmailButton">Send Inquiry</button>
+		</div>
+		</fieldset>
+		
+    </form>
+
+   <script>
+    function checkRequiredFields() {
+    const requiredFields = document.querySelectorAll('[required]');
+    let allFieldsFilled = true;
+
+    requiredFields.forEach((field) => {
+        if (field.value.trim() === '') {
+            allFieldsFilled = false;
+            field.style.border = '2px solid red'; 
+        } else {
+            field.style.border = ''; 
+        }
+    });
+
+    return allFieldsFilled;
+}
+
+	
+	
+	function toggleBreakdown() {
+        const breakdownSection = document.getElementById("travelCostBreakdown");
+        breakdownSection.style.display = breakdownSection.style.display === "none" ? "block" : "none";
+    }
+
+    function toggleManagerEmailField() {
+        const managerApprovalSelect = document.getElementById('managerApproved');
+        const managerEmailField = document.getElementById('managerEmailField');
+        managerEmailField.style.display = managerApprovalSelect.value === 'yes' ? 'block' : 'none';
+    }
+
+function calculateTotalCosts() {
+
+ if (!checkRequiredFields()) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+  			const departureDate = new Date(document.getElementById("departureDate").value);
+            const returnDate = new Date(document.getElementById("returnDate").value);
+            const hoursDifference = Math.abs(returnDate - departureDate) / 36e5;
+            const daysDifference = Math.abs(returnDate - departureDate) / 8.64e7;
+            const accommodation = document.getElementById('accommodation').value;
+            const checkInDate = new Date(document.getElementById('checkInDate').value);
+            const checkOutDate = new Date(document.getElementById('checkOutDate').value);
+            const sundriesCost = hoursDifference * parseFloat(document.getElementById("sundriesCost").value);
+
+            const hotelCheckInDate = new Date(document.getElementById("checkInDate").value);
+            const hotelCheckOutDate = new Date(document.getElementById("checkOutDate").value);
+            const hotelNights = document.getElementById("accommodation").value === 'yes' ? Math.abs(hotelCheckOutDate - hotelCheckInDate) / 8.64e7 : 0;
+            const hotelCost = hotelNights * parseFloat(document.getElementById("hotelFee").value);
+
+            const carRentalDays = document.getElementById("carRental").value === "yes" ? Math.abs(new Date(document.getElementById("carDropOffDate").value) - new Date(document.getElementById("carPickupDate").value)) / 8.64e7 : 0;
+            const carRentalCost = carRentalDays * parseFloat(document.getElementById("carRentalFee").value);
+
+            const mealsCost = daysDifference * parseFloat(document.getElementById("mealsCost").value);
+            const flightFee = parseFloat(document.getElementById("baseFlightFee").value);
+            const laborRate = parseFloat(document.getElementById("laborRate").value);
+            const totalLaborHours = parseFloat(document.getElementById("totalLaborHours").value);
+            const travelRate = parseFloat(document.getElementById("travelRate").value);
+            const totalTravelHours = parseFloat(document.getElementById("totalTravelHours").value);
+            const miscellaneousRate = parseFloat(document.getElementById("miscellaneousRate").value);
+
+            const laborCost = laborRate * totalLaborHours;
+            const travelCost = travelRate * totalTravelHours;
+            const miscellaneousCost = miscellaneousRate;
+
+            const totalInternalCosts = sundriesCost + hotelCost + carRentalCost + mealsCost + laborCost + travelCost + miscellaneousCost;
+            const totalCostsSpan = document.getElementById("totalCosts");
+            const costBreakdownDiv = document.getElementById("costBreakdown");
+
+            const breakdownSummary = `Hotel rate: €${document.getElementById("hotelFee").value} * ${hotelNights} nights + Car rental rate: €${document.getElementById("carRentalFee").value} * ${carRentalDays} days + Flight rate: €${flightFee} + Meals: €${document.getElementById("mealsCost").value} * ${daysDifference} days + Labor rate: €${laborRate} * ${totalLaborHours} hours + Travel rate: €${travelRate} * ${totalTravelHours} hours + Sundries: €${sundriesCost} + Miscellaneous: €${miscellaneousRate}`;
+     const totalCost = flightFee + totalInternalCosts;
+           totalCostsSpan.textContent = `Total costs: €${totalCost} Euros (${breakdownSummary})`;
+
+const calculateButton = document.getElementById('calculateTotalCosts');
+calculateButton.addEventListener('click', calculateEstimatedCosts);
+
+    const costElements = {
+        travelingCost: totalInternalCosts,
+        hotelCost: hotelCost,
+        carRentalCost: carRentalCost,
+        sundriesCost: sundriesCost,
+        mealsCost: mealsCost, 
+        flightFee: flightFee,
+        totalInternalCosts: totalInternalCosts
+    };
+
+    for (const [elementId, costValue] of Object.entries(costElements)) {
+        document.getElementById(elementId).textContent = `${costValue} Euros`;
+    }
+
+    costBreakdownDiv.style.display = "block"; 
+}
+
+
+
+  function toggleTravelByAirFields() {
+        const travelByAir = document.getElementById('TravelByAir').value;
+        const travelByAirFields = document.getElementById('TravelByAirFields');
+        if (travelByAir === 'yes') {
+            travelByAirFields.style.display = 'block';
+        } else {
+            travelByAirFields.style.display = 'none'; 
+        }
+    }
+
+ 
+function composeEmail() {
+    const travelerName = document.getElementById('travelerName').value;
+    const travelerName2 = document.getElementById('travelerName2').value;
+    const fromAirport = document.getElementById('fromAirport').value;
+    const destinationAirport = document.getElementById('destinationAirport').value;
+    const departureDateValue = document.getElementById('departureDate').value; 
+    const departureTime = document.getElementById('departureTime').value; 
+    const returnDateValue = document.getElementById('returnDate').value;
+    const returnTime = document.getElementById('returnTime').value; 
+    const travelByAir = document.getElementById('TravelByAir').value;
+    const travelByAirLuggage = document.getElementById('TravelByAirLuggage').value;
+    const travelByAirComments = document.getElementById('TravelByAirComments').value;
+    const customerName = document.getElementById('customerName').value;
+    const customerAddress = document.getElementById('customerAddress').value;
+    const carRental = document.getElementById('carRental').value;
+    const carPickupLocation = document.getElementById('carPickupLocation').value;
+    const carPickupDate = document.getElementById('carPickupDate').value;
+    const carDropOffDate = document.getElementById('carDropOffDate').value;
+    const carRentalComments = document.getElementById('carRentalComments').value;
+    const accommodation = document.getElementById('accommodation').value;
+    const hotelLink = document.getElementById('hotelLink').value;
+    const checkInDate = document.getElementById('checkInDate').value;
+    const checkOutDate = document.getElementById('checkOutDate').value;
+    const accommodationComments = document.getElementById('accommodationComments').value;
+    const CRMID = document.getElementById('CRMID').value;
+    const projectNumber = document.getElementById('projectNumber').value;
+    const orderNumber = document.getElementById('orderNumber').value;
+    const costCenter = document.getElementById('costCenter').value;
+    const quotedCosts = document.getElementById('quotedCosts').value;
+    const reasonForTravel = document.getElementById('reasonForTravel').value;
+    const managerApproved = document.getElementById('managerApproved').value;
+    const managerEmail = document.getElementById('managerEmail').value;
+    const totalCosts = document.getElementById('totalCosts').value;
+        
+    const departureDate = new Date(departureDateValue);
+    const returnDate = new Date(returnDateValue);
+    const hoursDifference = Math.abs(returnDate - departureDate) / 36e5;
+    const daysDifference = Math.abs(returnDate - departureDate) / 8.64e7;
+    const sundriesCost = hoursDifference * parseFloat(document.getElementById("sundriesCost").value);
+
+    const hotelCheckInDate = new Date(document.getElementById("checkInDate").value);
+    const hotelCheckOutDate = new Date(document.getElementById("checkOutDate").value);
+    const hotelNights = document.getElementById("accommodation").value === 'yes' ? Math.abs(hotelCheckOutDate - hotelCheckInDate) / 8.64e7 : 0;
+    const hotelCost = hotelNights * parseFloat(document.getElementById("hotelFee").value);
+
+    const carRentalDays = carRental === "yes" ? Math.abs(new Date(carDropOffDate) - new Date(carPickupDate)) / 8.64e7 : 0;
+    const carRentalCost = carRentalDays * parseFloat(document.getElementById("carRentalFee").value);
+
+    const mealsCost = daysDifference * parseFloat(document.getElementById("mealsCost").value);
+    const flightFee = parseFloat(document.getElementById("baseFlightFee").value);
+    const laborRate = parseFloat(document.getElementById("laborRate").value);
+    const totalLaborHours = parseFloat(document.getElementById("totalLaborHours").value);
+    const travelRate = parseFloat(document.getElementById("travelRate").value);
+    const totalTravelHours = parseFloat(document.getElementById("totalTravelHours").value);
+    const miscellaneousRate = parseFloat(document.getElementById("miscellaneousRate").value);
+
+    const laborCost = laborRate * totalLaborHours;
+    const travelCost = travelRate * totalTravelHours;
+    const miscellaneousCost = miscellaneousRate;
+
+    const totalInternalCosts = sundriesCost + hotelCost + carRentalCost + mealsCost + laborCost + travelCost + miscellaneousCost;
+    const totalCost = flightFee + totalInternalCosts;
+
+   const totalCostsSpan = document.getElementById("totalCosts");
+   const costBreakdownDiv = document.getElementById("costBreakdown");
+
+
+    const breakdownSummary = `Hotel rate: €${document.getElementById("hotelFee").value} * ${hotelNights} nights + Car rental rate: €${document.getElementById("carRentalFee").value} * ${carRentalDays} days + Flight rate: €${flightFee} + Meals: €${document.getElementById("mealsCost").value} * ${daysDifference} days + Labor rate: €${laborRate} * ${totalLaborHours} hours + Travel rate: €${travelRate} * ${totalTravelHours} hours + Sundries: €${sundriesCost}+ Miscellaneous: €${miscellaneousRate}`;
+
+    
+   
+    if (!checkRequiredFields()) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+
+      const subject = `Travel Itinerary ${travelerName} | Travel Date: ${departureDateValue} | ${destinationAirport} | Project: ${projectNumber} | Case ID: ${CRMID} |`;
+    let body = `Dear Travel team,\n` +
+               `I'd like to request a travel itinerary for the following traveler:\n\n` +
+               `Traveler Name: ${travelerName || 'N/A'}\n` +
+               `Traveler Name: ${travelerName2 || 'N/A'}\n\n` +
+               `From: ${fromAirport || 'N/A'}\t\t` +
+               `Destination: ${destinationAirport || 'N/A'}\n` +
+               `Departure Date: ${departureDateValue || 'N/A'}\t` +
+               `- ${departureTime || 'N/A'}\n` +
+               `Return Date: ${returnDateValue || 'N/A'}\t` +
+               `- ${returnTime || 'N/A'}\n\n`;
+
+    // Travel by Air details
+    body += `Travel by Air: ${travelByAir === 'yes' ? 'Yes' : 'No'}\n`;
+    if (travelByAir === 'yes') {
+        body += `Check-in Luggage: ${travelByAirLuggage || 'N/A'}\n`;
+        body += `Comments: ${travelByAirComments || 'N/A'}\n\n`;
+    }
+
+   // Car Rental details
+body += `Car rental: ${carRental === 'yes' ? 'Yes' : 'No'}\n`;
+if (carRental === 'yes') {
+    body += `Car rental pick-up location: ${document.getElementById('carPickupSameAsDestination').checked ? destinationAirport : carPickupLocation || 'N/A'}\n`;
+    body += `Car rental pick-up date: ${departureDateValue || 'N/A'}\n`; 
+    body += `Car rental drop-off date: ${returnDateValue || 'N/A'}\n`; 
+    body += `Comments: ${carRentalComments || 'N/A'}\n\n`;
+}
+
+
+body += `Accommodation: ${accommodation === 'yes' ? 'Yes' : 'No'}\n`;
+if (accommodation === 'yes') {
+    body += `Hotel (preferred): ${document.getElementById('accommodationSameAsDestination').checked ? destinationAirport : hotelLink || 'N/A'}\n`;
+    body += `Check-in Date: ${departureDateValue || 'N/A'}\n`; 
+    body += `Check-out Date: ${returnDateValue || 'N/A'}\n`; 
+    body += `Comments: ${accommodationComments || 'N/A'}\n\n`;
+}
+
+
+    body += `Customer Name: ${customerName || 'N/A'}\n`;
+    body += `Customer Address: ${customerAddress || 'N/A'}\n\n`;
+
+
+    body += `CRM ID/CASE: ${CRMID || 'N/A'}\n`;
+    body += `Project Number: ${projectNumber || 'N/A'}\n`;
+    body += `Order Confirmation Number: ${orderNumber || 'N/A'}\n`;
+    body += `Cost Center: ${costCenter || 'N/A'}\n\n`;
+    body += `Quoted as actual costs?: ${quotedCosts === 'yes' ? 'Yes' : 'No'}\n`;
+    body += `Reason for travel: ${reasonForTravel || 'N/A'}\n\n`;
+   body += `Total estimated costs: ${totalCost || 'N/A'} Euros\n`;
+  	body += `Breakdown: ${breakdownSummary}\n`;
+  body += `Ensure that the costs are within the project or purchase order budget. \n\n`;
+    body += `Manager approved?: ${managerApproved === 'yes' ? 'Yes' : 'No'}\n`;
+
+  
+    if (managerApproved === 'yes' && managerEmail) {
+        body += `CC: ${managerEmail}\n`;
+    }
+    
+
+    const mailtoURL = `mailto:example@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}&cc=${managerEmail}`;
+    window.location.href = mailtoURL;
+}
+
+
+
+function setupEventListeners() {
+    document.getElementById("calculateTotalCosts").addEventListener("click", calculateTotalCosts);
+    document.getElementById("sendEmailButton").addEventListener("click", composeEmail);
+    document.getElementById('managerApproved').addEventListener('change', toggleManagerEmailField);
+    document.getElementById('accommodation').addEventListener('change', toggleAccommodationFields);
+    document.getElementById('carPickupSameAsDestination').addEventListener('change', toggleBlurEffect);
+    document.getElementById('accommodationSameAsDestination').addEventListener('change', toggleAccommodationBlurEffect);
+    document.getElementById('carPickupSameAsDestination').addEventListener('change', copyTravelDatesToCarRental);
+}
+
+setupEventListeners();
+
+document.getElementById('travelByAir').addEventListener('change', function() {
+        const travelByAirValue = this.value;
+        if (travelByAirValue === 'no') {
+            document.getElementById('travelByAirLuggage').value = '';
+            document.getElementById('travelByAirComments').value = '';
+        }
+    });
+
+
+document.getElementById('accommodation').addEventListener('change', function() {
+        const accommodationValue = this.value;
+        if (accommodationValue === 'no') {
+            document.getElementById('checkInDate').value = '';
+            document.getElementById('checkOutDate').value = '';
+        }
+    });
+	
+      document.getElementById('carRental').addEventListener('change', function() {
+        const carRentalValue = this.value;
+        if (carRentalValue === 'no') {
+            document.getElementById('carPickupDate').value = '';
+            document.getElementById('carDropOffDate').value = '';
+        }
+    });
+	
+	
+	function showHotelNote() {
+    const hotelLink = document.getElementById('hotelLink');
+    const hotelNote = document.getElementById('hotelNote');
+
+    if (hotelLink.value.trim() !== '') {
+      hotelNote.style.display = 'block'; 
+    } else {
+      hotelNote.style.display = 'none'; 
+    }
+  }
+  
+  
+
+function toggleBlurEffect() {
+    const carPickupLocation = document.getElementById('carPickupLocation');
+    const carPickupDate = document.getElementById('carPickupDate');
+    const carDropOffDate = document.getElementById('carDropOffDate');
+    const carPickupSameAsDestination = document.getElementById('carPickupSameAsDestination');
+
+    if (carPickupSameAsDestination.checked) {
+        carPickupLocation.disabled = true;
+        carPickupDate.disabled = true;
+        carDropOffDate.disabled = true;
+    } else {
+        carPickupLocation.disabled = false;
+        carPickupDate.disabled = false;
+        carDropOffDate.disabled = false;
+    }
+}
+
+
+function toggleCarRentalFields() {
+    const carRental = document.getElementById('carRental').value;
+    const carRentalFields = document.getElementById('carRentalFields');
+    const carRentalNote = document.getElementById('carRentalNote');
+
+    if (carRental === 'yes') {
+        carRentalFields.style.display = 'block';
+        carRentalNote.style.display = 'block';
+    } else {
+        carRentalFields.style.display = 'none';
+        carRentalNote.style.display = 'none';
+    }
+
+    toggleBlurEffect();
+}
+
+
+
+function copyTravelDatesToCarRental() {
+    const carPickupLocation = document.getElementById('carPickupLocation');
+    const carPickupDate = document.getElementById('carPickupDate');
+    const carDropOffDate = document.getElementById('carDropOffDate');
+    const carPickupSameAsDestination = document.getElementById('carPickupSameAsDestination');
+    const departureDateValue = document.getElementById('departureDate').value;
+    const returnDateValue = document.getElementById('returnDate').value;
+	const destinationAirport = document.getElementById('destinationAirport').value;
+    if (carPickupSameAsDestination.checked) {
+        carPickupLocation.value = destinationAirport || '';
+        carPickupDate.value = departureDateValue || '';
+        carDropOffDate.value = returnDateValue || '';
+    } else {
+      
+        carPickupLocation.value = '';
+        carPickupDate.value = '';
+        carDropOffDate.value = '';
+    }
+}
+
+copyTravelDatesToCarRental();
+
+
+       
+        const departureDate = new Date(document.getElementById('departureDate').value);
+        const selectedReturnDate = new Date(returnDate.value);
+        const timeDifference = selectedReturnDate - departureDate;
+        const hoursDifference = Math.floor(timeDifference / (1000 * 3600));
+
+        if (hoursDifference > 10) {
+            returnDateNote.style.display = 'block'; 
+        } else {
+            returnDateNote.style.display = 'none';
+        }
+    
+	
+	function showCustomerNameNote() {
+        const customerName = document.getElementById('customerName');
+        const customerNameNote = document.getElementById('customerNameNote');
+
+        if (customerName.value.trim() !== '') {
+            customerNameNote.style.display = 'block'; 
+        } else {
+            customerNameNote.style.display = 'none'; 
+        }
+    }
+	function showQuotedCostsNote() {
+        const quotedCosts = document.getElementById('quotedCosts');
+        const quotedCostsNote = document.getElementById('quotedCostsNote');
+
+        if (quotedCosts.value === 'yes') {
+            quotedCostsNote.style.display = 'block'; 
+        } else {
+            quotedCostsNote.style.display = 'none'; 
+        }
+    }
+	 function toggleTravelByAirFields() {
+        const travelByAir = document.getElementById('TravelByAir').value;
+        const travelByAirFields = document.getElementById('TravelByAirFields');
+        const travelByAirNote = document.getElementById('TravelByAirNote');
+        
+        if (travelByAir === 'yes') {
+            travelByAirFields.style.display = 'block'; 
+            travelByAirNote.style.display = 'block'; 
+        } else {
+            travelByAirFields.style.display = 'none'; 
+            travelByAirNote.style.display = 'none'; 
+        }
+    }
+
+function toggleAccommodationBlurEffect() {
+    const hotelLink = document.getElementById('hotelLink');
+    const checkInDate = document.getElementById('checkInDate');
+    const checkOutDate = document.getElementById('checkOutDate');
+    const accommodationSameAsDestination = document.getElementById('accommodationSameAsDestination');
+    const departureDateValue = document.getElementById('departureDate').value;
+    const returnDateValue = document.getElementById('returnDate').value;
+    const destinationAirport = document.getElementById('destinationAirport').value;
+
+    if (accommodationSameAsDestination.checked) {
+        hotelLink.value = destinationAirport || '';
+        checkInDate.value = departureDateValue || '';
+        checkOutDate.value = returnDateValue || '';
+
+        hotelLink.disabled = true;
+        checkInDate.disabled = true;
+        checkOutDate.disabled = true;
+    } else {
+        hotelLink.disabled = false;
+        checkInDate.disabled = false;
+        checkOutDate.disabled = false;
+    }
+}
+
+
+function toggleAccommodationFields() {
+    const accommodation = document.getElementById('accommodation').value;
+    const accommodationFields = document.getElementById('accommodationFields');
+
+    if (accommodation === 'yes') {
+        accommodationFields.style.display = 'block';
+    } else {
+        accommodationFields.style.display = 'none';
+    }
+
+
+    toggleAccommodationBlurEffect();
+}
+
+toggleAccommodationFields();
+
+
+
+</script>
+
+
+      <h5>
+
+            <p class="Donate_text">Did I save your time?<a href="https://www.paypal.com/donate/?hosted_button_id=8TFNXVNPKKX9Q"target="_blank" rel="noopener noreferrer"> Show appreciation here.</a></p>
+        
+        <div class="Donate_section">
+         <div class="container">
+        </div>
+      </div>
+
+            <p class="copyright_text">By Akmal Zakeryaev 2024 All Rights Reserved (At your own risk).
+              <a href="https://en.wikipedia.org/wiki/Copyright"target="_blank" rel="noopener noreferrer"> Copy Rights.</a></p>
+            
+			<div class="feedback">Share your feedback: <a href="https://ncv.microsoft.com/vpssNQPKlV"target="_blank" rel="noopener noreferrer">Feedback form.</a>></div>
+         
+         </h5>
+         <div class="copyright_section">
+         <div class="container">
+         </div>
+      </div>
+
+</body>
+</html>
