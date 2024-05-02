@@ -17,7 +17,7 @@
             padding-top: 50px;
         }
         .report-button {
-            background-color: #004a99; 
+            background-color: #004a99; /* Moog Blue */
             color: white;
             border: none;
             padding: 10px 20px;
@@ -28,14 +28,31 @@
             text-transform: uppercase;
         }
         .report-button:hover {
-            background-color: #194775;
+            background-color: #194775; /* Darker Moog Blue */
         }
         .jumbotron {
-            background-color: #194775;
+            background-color: #194775; /* Moog Blue */
             color: white;
             padding: 2rem 1rem;
             margin-bottom: 2rem;
             text-align: center;
+        }
+
+        /* Style for feedback and copyright text */
+        .feedback-container {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .copyright_text {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .copyright_text a {
+            color: #666;
         }
     </style>
 </head>
@@ -50,49 +67,20 @@
         <button class="report-button btn btn-primary" onclick="window.open('https://akmalweb.github.io/ConferenceRservation/index.html', '_blank')">Conference Room Reservation</button>
         <button class="report-button btn btn-primary" onclick="window.open('https://akmalweb.github.io/CarRservation/index.html', '_blank')">Company Car Reservation</button>
     </div>
-    
+
     <div id="rte" contenteditable="true" style="height: 100%; width: 100%; outline: 0; overflow: auto"></div>
-    <script type="text/javascript">
-    document.getElementById("rte").focus();
-    document.body.addEventListener("paste", function(e) {
-        for (var i = 0; i < e.clipboardData.items.length; i++) {
-            if (e.clipboardData.items[i].kind == "file" && e.clipboardData.items[i].type == "image/png") {
-               
-                var imageFile = e.clipboardData.items[i].getAsFile();
-               
-                var fileReader = new FileReader();
-                fileReader.onloadend = function(e) {
-                   
-                    var image = document.createElement("IMG");
-                    image.src = this.result;
-                 
-                    var range = window.getSelection().getRangeAt(0);
-                    range.insertNode(image);
-                    range.collapse(false);
-              
-                    var selection = window.getSelection();
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-                };
-              
-                fileReader.readAsDataURL(imageFile);
-                
-                e.preventDefault();
-          
-                break;
-            }
-        }
-    });
-    </script>
+  
 
-    <fieldset>
-        <div class="feedback">Share your feedback: <a href="https://ncv.microsoft.com/vpssNQPKlV" target="_blank" rel="noopener noreferrer">Feedback form.</a></div>
-    </fieldset>
-
-    <fieldset>
-        <p class="copyright_text">By Akmal Zakeryaev 2024 All Rights Reserved (At your own risk).
-            <a href="https://en.wikipedia.org/wiki/Copyright" target="_blank" rel="noopener noreferrer">Copyrights.</a>
-        </p>
-    </fieldset>
+    <!-- Style container for feedback and copyright text -->
+    <div class="feedback-container">
+        <fieldset>
+            <div class="feedback">Share your feedback: <a href="https://ncv.microsoft.com/vpssNQPKlV" target="_blank" rel="noopener noreferrer">Feedback form.</a></div>
+        </fieldset>
+        <fieldset>
+            <p class="copyright_text">By Akmal Zakeryaev 2024 All Rights Reserved (At your own risk).
+                <a href="https://en.wikipedia.org/wiki/Copyright" target="_blank" rel="noopener noreferrer">Copyrights.</a>
+            </p>
+        </fieldset>
+    </div>
 </body>
 </html>
