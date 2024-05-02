@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporting and Inquiry</title>
+    <title>Front Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
         body {
@@ -17,7 +17,7 @@
             padding-top: 50px;
         }
         .report-button {
-            background-color: #004a99; /* Moog Blue */
+            background-color: #004a99; 
             color: white;
             border: none;
             padding: 10px 20px;
@@ -28,10 +28,10 @@
             text-transform: uppercase;
         }
         .report-button:hover {
-            background-color: #003366; /* Darker Moog Blue */
+            background-color: #194775;
         }
         .jumbotron {
-            background-color: #004a99; /* Moog Blue */
+            background-color: #194775;
             color: white;
             padding: 2rem 1rem;
             margin-bottom: 2rem;
@@ -42,7 +42,7 @@
 <body>
     <div class="jumbotron">
         <h1 class="display-4">Welcome</h1>
-        <p class="lead">Your one-stop solution for your Time Reporting and Inquiry</p>
+        <p class="lead">Simplify Your Project Time Reporting, Travel Inquiries, and Reservations,  All in One Place.</p>
     </div>
     <div class="button-container">
         <button class="report-button btn btn-primary" onclick="window.open('https://akmalweb.github.io/Generator/index.html', '_blank')">Project Time Reporting</button>
@@ -50,39 +50,49 @@
         <button class="report-button btn btn-primary" onclick="window.open('https://akmalweb.github.io/ConferenceRservation/index.html', '_blank')">Conference Room Reservation</button>
         <button class="report-button btn btn-primary" onclick="window.open('https://akmalweb.github.io/CarRservation/index.html', '_blank')">Company Car Reservation</button>
     </div>
+    
     <div id="rte" contenteditable="true" style="height: 100%; width: 100%; outline: 0; overflow: auto"></div>
-<script type="text/javascript">
-document.getElementById("rte").focus();
-document.body.addEventListener("paste", function(e) {
-    for (var i = 0; i < e.clipboardData.items.length; i++) {
-        if (e.clipboardData.items[i].kind == "file" && e.clipboardData.items[i].type == "image/png") {
-            // get the blob
-            var imageFile = e.clipboardData.items[i].getAsFile();
-            // read the blob as a data URL
-            var fileReader = new FileReader();
-            fileReader.onloadend = function(e) {
-                // create an image
-                var image = document.createElement("IMG");
-                image.src = this.result;
-                // insert the image
-                var range = window.getSelection().getRangeAt(0);
-                range.insertNode(image);
-                range.collapse(false);
-                // set the selection to after the image
-                var selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
-            };
-            // TODO: Error Handling!
-            // fileReader.onerror = ...
-            fileReader.readAsDataURL(imageFile);
-            // prevent the default paste action
-            e.preventDefault();
-            // only paste 1 image at a time
-            break;
+    <script type="text/javascript">
+    document.getElementById("rte").focus();
+    document.body.addEventListener("paste", function(e) {
+        for (var i = 0; i < e.clipboardData.items.length; i++) {
+            if (e.clipboardData.items[i].kind == "file" && e.clipboardData.items[i].type == "image/png") {
+               
+                var imageFile = e.clipboardData.items[i].getAsFile();
+               
+                var fileReader = new FileReader();
+                fileReader.onloadend = function(e) {
+                   
+                    var image = document.createElement("IMG");
+                    image.src = this.result;
+                 
+                    var range = window.getSelection().getRangeAt(0);
+                    range.insertNode(image);
+                    range.collapse(false);
+              
+                    var selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                };
+              
+                fileReader.readAsDataURL(imageFile);
+                
+                e.preventDefault();
+          
+                break;
+            }
         }
-    }
-});
-</script>
+    });
+    </script>
+
+    <fieldset>
+        <div class="feedback">Share your feedback: <a href="https://ncv.microsoft.com/vpssNQPKlV" target="_blank" rel="noopener noreferrer">Feedback form.</a></div>
+    </fieldset>
+
+    <fieldset>
+        <p class="copyright_text">By Akmal Zakeryaev 2024 All Rights Reserved (At your own risk).
+            <a href="https://en.wikipedia.org/wiki/Copyright" target="_blank" rel="noopener noreferrer">Copyrights.</a>
+        </p>
+    </fieldset>
 </body>
 </html>
