@@ -112,8 +112,8 @@ input {
                 <div id="input-fields">
                     <div class="input-row">
                         <label for="date-selector-1">Date:</label>
-                        <input type="date" class="date-selector" id="date-selector-1" min="2024-01-01"
-                            max="2025-12-31">
+                        <input type="date" class="date-selector" id="date-selector-1" min="2023-01-01"
+                            max="2026-12-31">
                         <label for="subtask-selector-1">Subtask:</label>
                         <select class="subtask-selector" id="subtask-selector-1">
                             <option value="Non-Prod Admin" selected>Non-Prod Admin</option>
