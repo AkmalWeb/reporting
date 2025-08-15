@@ -3,85 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Front Page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Dashboard - Project Tools</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Use the Inter font family */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
         }
-        .button-container {
-            text-align: center;
-            padding-top: 50px;
+        /* Simple animation for cards on load */
+        .card-enter {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: card-enter-animation 0.5s ease-out forwards;
         }
-        .report-button {
-            background-color: #004a99; /* Moog Blue */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            text-transform: uppercase;
-        }
-        .report-button:hover {
-            background-color: #194775; /* Darker Moog Blue */
-        }
-        .jumbotron {
-            background-color: #194775; /* Moog Blue */
-            color: white;
-            padding: 2rem 1rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        /* Style for feedback and copyright text */
-        .feedback-container {
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-            margin-top: 20px;
-        }
-
-        .copyright_text {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .copyright_text a {
-            color: #666;
+        @keyframes card-enter-animation {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
-<body>
-    <div class="jumbotron">
-        <h1 class="display-4">Welcome</h1>
-        <p class="lead">Simplify Your Project Time Reporting, Travel Inquiries, and Reservations,  All in One Place.</p>
-    </div>
-    <div class="button-container">
-        <button class="report-button btn btn-primary" onclick="window.open('https://akmalweb.github.io/Generator/index.html', '_blank')">Project Time Reporting</button>
-       <<button class="report-button btn btn-primary" onclick="window.open('https://akmalweb.github.io/TravelInquiryForm/Index.html', '_blank')">Travel Inquiry Form</button>
-        <button class="report-button btn btn-primary" onclick="window.open('https://akmalweb.github.io/ConferenceRservation/index.html', '_blank')">Conference Room Reservation</button>
-        <button class="report-button btn btn-primary" onclick="window.open('https://akmalweb.github.io/CompanyCarReservation/', '_blank')">Company Car Reservation</button>
-    </div>
+<body class="bg-slate-900 text-slate-200">
 
-    <div id="rte" contenteditable="true" style="height: 100%; width: 100%; outline: 0; overflow: auto"></div>
-  
-
-    <!-- Style container for feedback and copyright text -->
-    <div class="feedback-container">
-        <fieldset>
-            <div class="feedback">Share your feedback: <a href="https://ncv.microsoft.com/vpssNQPKlV" target="_blank" rel="noopener noreferrer">Feedback form.</a></div>
-        </fieldset>
-        <fieldset>
-            <p class="copyright_text">By Akmal Zakeryaev 2025 All Rights Reserved (At your own risk).
-                <a href="https://en.wikipedia.org/wiki/Copyright" target="_blank" rel="noopener noreferrer">Copyrights.</a>
+    <!-- Main Container -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-3">Welcome to Your Dashboard</h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                Simplify your project time reporting, travel inquiries, and reservations—all in one place.
             </p>
-        </fieldset>
+        </header>
+
+        <!-- Grid Container for Action Cards -->
+        <main class="w-full max-w-6xl">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Card 1: Project Time Reporting -->
+                <a href="https://akmalweb.github.io/Generator/index.html" target="_blank" rel="noopener noreferrer" class="card-enter group block rounded-xl bg-slate-800/80 border border-slate-700 p-6 shadow-lg transition-all duration-300 hover:bg-slate-800 hover:border-blue-500 hover:-translate-y-1" style="animation-delay: 100ms;">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-500 text-white mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Project Time Reporting</h3>
+                    <p class="text-sm text-slate-400">Log and manage your project hours efficiently.</p>
+                </a>
+
+                <!-- Card 2: Travel Inquiry Form -->
+                <a href="https://akmalweb.github.io/TravelInquiryForm/Index.html" target="_blank" rel="noopener noreferrer" class="card-enter group block rounded-xl bg-slate-800/80 border border-slate-700 p-6 shadow-lg transition-all duration-300 hover:bg-slate-800 hover:border-green-500 hover:-translate-y-1" style="animation-delay: 200ms;">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-green-500 text-white mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Travel Inquiry Form</h3>
+                    <p class="text-sm text-slate-400">Submit and track your business travel requests.</p>
+                </a>
+
+                <!-- Card 3: Conference Room Reservation -->
+                <a href="https://akmalweb.github.io/ConferenceRservation/index.html" target="_blank" rel="noopener noreferrer" class="card-enter group block rounded-xl bg-slate-800/80 border border-slate-700 p-6 shadow-lg transition-all duration-300 hover:bg-slate-800 hover:border-purple-500 hover:-translate-y-1" style="animation-delay: 300ms;">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-purple-500 text-white mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Conference Room Reservation</h3>
+                    <p class="text-sm text-slate-400">Book meeting rooms for your team instantly.</p>
+                </a>
+                
+                <!-- Card 4: Company Car Reservation -->
+                <a href="https://akmalweb.github.io/CompanyCarReservation/" target="_blank" rel="noopener noreferrer" class="card-enter group block rounded-xl bg-slate-800/80 border border-slate-700 p-6 shadow-lg transition-all duration-300 hover:bg-slate-800 hover:border-yellow-500 hover:-translate-y-1" style="animation-delay: 400ms;">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-yellow-500 text-white mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Company Car Reservation</h3>
+                    <p class="text-sm text-slate-400">Reserve a company vehicle for your business needs.</p>
+                </a>
+
+            </div>
+        </main>
+
+        <!-- Footer Section -->
+        <footer class="text-center text-slate-500 text-sm mt-12">
+            <div class="mb-2">
+                <span>Share your feedback:</span>
+                <a href="https://ncv.microsoft.com/vpssNQPKlV" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 hover:underline">Feedback Form</a>
+            </div>
+            <p>By Akmal Zakeryaev 2025 All Rights Reserved. 
+                <a href="https://en.wikipedia.org/wiki/Copyright" target="_blank" rel="noopener noreferrer" class="hover:underline">Copyrights.</a>
+            </p>
+        </footer>
+        
     </div>
 </body>
 </html>
-
